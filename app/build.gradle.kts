@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.dagger.hilt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -49,4 +51,13 @@ dependencies {
     // Navigation components
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+
+    // Dagger Hilt
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
