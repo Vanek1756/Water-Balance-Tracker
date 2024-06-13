@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,20 +16,37 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
 ) : BaseViewModel() {
 
-    val signInFinishFlow: MutableSharedFlow<Any> = MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val signInFinishFlow: MutableSharedFlow<Any> =
+        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    fun signInAccount(email: String, password: String) {
+    val userEmail = MutableStateFlow<String?>(null)
+
+    val password = MutableStateFlow<String?>(null)
+
+
+    fun onLoginClick() {
         viewModelScope.launch {
+            val username = userEmail.value?.trim() ?: ""
+            val password = password.value ?: ""
+
             mutableIsProgressVisible.withProgress {
-                Firebase.auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            signInFinishFlow.tryEmit("success")
-                        } else {
-                            onError(task.exception?.localizedMessage ?: "Authentication failed.")
-                        }
-                    }
+                runCatching { signInAccount(username, password) }
+                    .onSuccess { }
+                    .onFailure { }
             }
+        }
+    }
+
+    private fun signInAccount(email: String, password: String) {
+        mutableIsProgressVisible.withProgress {
+            Firebase.auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        signInFinishFlow.tryEmit("success")
+                    } else {
+                        onError(task.exception?.localizedMessage ?: "Authentication failed.")
+                    }
+                }
         }
     }
 

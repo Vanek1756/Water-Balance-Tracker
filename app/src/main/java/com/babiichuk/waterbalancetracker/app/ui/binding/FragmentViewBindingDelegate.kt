@@ -1,4 +1,4 @@
-package com.babiichuk.waterbalancetracker.app.ui.utils
+package com.babiichuk.waterbalancetracker.app.ui.binding
 
 import android.util.Log
 import android.view.View

@@ -7,8 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.babiichuk.waterbalancetracker.R
+import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
-import com.babiichuk.waterbalancetracker.app.ui.utils.viewBinding
 import com.babiichuk.waterbalancetracker.databinding.FragmentHomeBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

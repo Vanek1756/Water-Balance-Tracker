@@ -8,9 +8,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.babiichuk.waterbalancetracker.R
+import com.babiichuk.waterbalancetracker.app.ui.binding.bind
+import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
 import com.babiichuk.waterbalancetracker.app.ui.extensions.showToast
-import com.babiichuk.waterbalancetracker.app.ui.utils.viewBinding
 import com.babiichuk.waterbalancetracker.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -34,23 +35,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun FragmentLoginBinding.setupBinding(){
-        btnSignIn.setOnClickListener { singInAccount() }
+        btnSignIn.setOnClickListener { viewModel.onLoginClick() }
         btnSignUp.setOnClickListener { openRegisterFragment() }
-    }
-
-    private fun singInAccount() {
-        val email = binding.inputEmail.text.toString().trim()
-        val password = binding.inputPassword.text.toString().trim()
-        if (email.isEmpty()) {
-            Toast.makeText(requireContext(), "Enter email", Toast.LENGTH_LONG).show()
-            return
-        }
-        if (password.isEmpty()) {
-            Toast.makeText(requireContext(), "Enter password", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        viewModel.signInAccount(email, password)
     }
 
     private fun LoginViewModel.subscribe(){
@@ -58,6 +44,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             launch { mutableIsProgressVisible.collectLatest {  binding.loadingProgress.toggleVisibility(it) } }
             launch { mutableErrorMessage.collectLatest { showError(it) } }
             launch { signInFinishFlow.collectLatest { signInSuccess() } }
+            launch { userEmail.bind(binding.inputEmail) }
+            launch { password.bind(binding.inputPassword) }
         }
     }
 
