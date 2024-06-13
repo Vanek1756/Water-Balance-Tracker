@@ -1,4 +1,4 @@
-package com.babiichuk.waterbalancetracker.app.ui.main
+package com.babiichuk.waterbalancetracker.app.ui.pages.main
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

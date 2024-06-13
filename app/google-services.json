@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1915531032",
+    "project_id": "water-tracker-app-5c245",
+    "storage_bucket": "water-tracker-app-5c245.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1915531032:android:cfe4fd059f635ef632786d",
+        "android_client_info": {
+          "package_name": "com.babiichuk.waterbalancetracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO25w5GSp5RxQ4Z_pU3bDCjIH5xsPj_fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

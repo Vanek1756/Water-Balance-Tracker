@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_height="100dp"
+    tools:layout_width="100dp"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <FrameLayout
+        android:id="@+id/loaderContainer"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/loader"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_load_icon" />
+    </FrameLayout>
+
+</merge>

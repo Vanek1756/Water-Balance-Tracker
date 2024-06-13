@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.dagger.hilt)
     id("kotlin-kapt")
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.navigation.safeargs)
 }
 
 android {
@@ -58,6 +60,10 @@ dependencies {
     // Dagger Hilt
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
+
+    // Firebase
+    implementation(libs.firebase.auth)
+
 }
 
 // Allow references to generated code
