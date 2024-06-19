@@ -1,7 +1,8 @@
-package com.babiichuk.waterbalancetracker.app.ui.pages.login
+package com.babiichuk.waterbalancetracker.app.ui.pages.auth.login
 
 import androidx.lifecycle.viewModelScope
 import com.babiichuk.waterbalancetracker.app.core.extensions.withProgress
+import com.babiichuk.waterbalancetracker.app.ui.loaders.UserLoader
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -14,14 +15,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val userLoader: UserLoader
 ) : BaseViewModel() {
 
-    val signInFinishFlow: MutableSharedFlow<Any> =
-        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val userEmail = MutableStateFlow<String?>("test1@gmail.com")
 
-    val userEmail = MutableStateFlow<String?>(null)
+    val password = MutableStateFlow<String?>("qwerty")
 
-    val password = MutableStateFlow<String?>(null)
+    val userFlow = userLoader.userInfoStateFlow
 
 
     fun onLoginClick() {
@@ -42,7 +43,7 @@ class LoginViewModel @Inject constructor(
             Firebase.auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        signInFinishFlow.tryEmit("success")
+                        userLoader.getOrInsertUser(Firebase.auth.currentUser)
                     } else {
                         onError(task.exception?.localizedMessage ?: "Authentication failed.")
                     }

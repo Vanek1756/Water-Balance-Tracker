@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 
+@JvmName("bindTextInputField-String")
 suspend fun MutableStateFlow<String?>.bind(filed: TextInputEditText) {
     val watcher = SimpleTextWatcher(afterTextChanged = {
         val newValue =  getTextString(filed)
@@ -17,6 +18,24 @@ suspend fun MutableStateFlow<String?>.bind(filed: TextInputEditText) {
     })
     filed.addTextChangedListener(watcher)
     onEach { setText(filed, it) }
+        .onCompletion { filed.removeTextChangedListener(watcher) }
+        .collect()
+}
+
+@JvmName("bindTextInputField-Double")
+suspend fun MutableStateFlow<Double>.bind(filed: TextInputEditText) {
+    val watcher = SimpleTextWatcher(afterTextChanged = {
+        try {
+            val newValue =  getTextString(filed).toString().toDouble()
+            if (newValue != value) {
+                value = newValue
+            }
+        } catch (e: Exception){
+            e.stackTrace
+        }
+    })
+    filed.addTextChangedListener(watcher)
+    onEach { setText(filed, it.toString()) }
         .onCompletion { filed.removeTextChangedListener(watcher) }
         .collect()
 }

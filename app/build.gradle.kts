@@ -1,10 +1,13 @@
+import com.android.build.api.dsl.ApplicationBuildFeatures
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.dagger.hilt)
-    id("kotlin-kapt")
+//    id("kotlin-kapt")
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -22,7 +25,7 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release"){
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -37,9 +40,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        viewBinding = true
-    }
+//    buildFeatures {
+//        viewBinding = true
+//    }
+    buildFeatures(
+        Action<ApplicationBuildFeatures> {
+            viewBinding = true
+        }
+    )
 }
 
 dependencies {
@@ -59,14 +67,18 @@ dependencies {
 
     // Dagger Hilt
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Firebase
     implementation(libs.firebase.auth)
 
+    implementation(libs.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
 }
 
 // Allow references to generated code
-kapt {
-    correctErrorTypes = true
-}
+//kapt {
+//    correctErrorTypes = true
+//}

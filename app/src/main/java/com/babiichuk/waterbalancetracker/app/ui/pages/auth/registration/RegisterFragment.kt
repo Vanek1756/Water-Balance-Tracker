@@ -1,24 +1,21 @@
-package com.babiichuk.waterbalancetracker.app.ui.pages.registration
+package com.babiichuk.waterbalancetracker.app.ui.pages.auth.registration
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.binding.bind
 import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
-import com.babiichuk.waterbalancetracker.app.ui.extensions.showToast
+import com.babiichuk.waterbalancetracker.app.ui.pages.BaseFragment
 import com.babiichuk.waterbalancetracker.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment(R.layout.fragment_register) {
+class RegisterFragment : BaseFragment(R.layout.fragment_register) {
 
     companion object {
         const val TAG = "RegisterFragment"
@@ -49,15 +46,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
 
-    private fun showError(message: String?) {
-        message?.let { showToast(message, Toast.LENGTH_SHORT) }
-    }
-
     private fun registerIsSuccess() {
-        findNavController().navigate(R.id.nav_main)
+        navigateTo(R.id.nav_poll)
     }
 
     private fun returnToLoginFragment() {
-        findNavController().navigateUp()
+        navigateUp()
     }
 }

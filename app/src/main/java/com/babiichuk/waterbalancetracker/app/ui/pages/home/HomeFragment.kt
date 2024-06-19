@@ -2,13 +2,12 @@ package com.babiichuk.waterbalancetracker.app.ui.pages.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
+import com.babiichuk.waterbalancetracker.app.ui.pages.BaseFragment
 import com.babiichuk.waterbalancetracker.databinding.FragmentHomeBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -18,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment  : Fragment(R.layout.fragment_home) {
+class HomeFragment  : BaseFragment(R.layout.fragment_home) {
 
     companion object {
         const val TAG = "HomeFragment"
@@ -43,8 +42,8 @@ class HomeFragment  : Fragment(R.layout.fragment_home) {
     }
 
     private fun signOut() {
-        CoroutineScope(Dispatchers.IO).launch { Firebase.auth.signOut() }
-        findNavController().navigate(R.id.nav_login)
+        viewModel.signOut()
+        navigateTo(R.id.nav_login)
     }
 
     private fun HomeViewModel.subscribe(){

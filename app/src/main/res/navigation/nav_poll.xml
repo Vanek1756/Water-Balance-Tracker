@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_poll"
+    app:startDestination="@id/genderFragment">
+
+    <fragment
+        android:id="@+id/genderFragment"
+        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.poll.nameandgender.NameAndGenderFragment"
+        android:label="GenderFragment" >
+        <action
+            android:id="@+id/action_genderFragment_to_ageAndWeightFragment"
+            app:destination="@id/ageAndWeightFragment" />
+    </fragment>
+
+    <include app:graph="@navigation/nav_main" />
+    <fragment
+        android:id="@+id/ageAndWeightFragment"
+        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.poll.ageandweight.AgeAndWeightFragment"
+        android:label="AgeAndWeightFragment" >
+        <action
+            android:id="@+id/action_ageAndWeightFragment_to_calculationFragment"
+            app:destination="@id/calculationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculationFragment"
+        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.poll.calculation.CalculationFragment"
+        android:label="CalculationFragment" />
+</navigation>

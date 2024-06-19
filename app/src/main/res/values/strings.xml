@@ -1,11 +1,35 @@
 <resources>
     <string name="app_name">Water Balance Tracker</string>
 
-<!--    Login screen    -->
+    <!--    Login screen    -->
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_signIn">Sign in</string>
     <string name="login_signUp">Sign up</string>
     <string name="login_registrationIn">Register in</string>
     <string name="login_loginTo">Login to</string>
+    <string name="login_later">Later</string>
+
+    <!--    Poll screens    -->
+    <string name="poll_step1">Step 1</string>
+    <string name="poll_step2">Step 2</string>
+    <string name="poll_different_amounts_of_water_per_day">Men and women have different amounts of water per day</string>
+    <string name="poll_your_gender">What is your gender?</string>
+    <string name="poll_man">Man</string>
+    <string name="poll_woman">Woman</string>
+    <string name="poll_hello_what_is_your_name">Hello! What is your name?</string>
+    <string name="poll_help_us_address_you_by_name">This will help us address you by name. Your name will be visible only to you.</string>
+    <string name="poll_how_old_are_you">How old are you?</string>
+    <string name="poll_enter_your_weight">Enter your weight to make it easier to determine your daily water intake</string>
+    <string name="poll_older_person_gets_more_water">The older a person gets, the more water he needs to drink</string>
+    <string name="poll_what_is_your_weight">What is your weight?</string>
+    <string name="poll_great_water_intake_calculated">Great! We have calculated your daily water intake requirement. If your doctor has advised a different amount, please follow your doctor\'s recommendations.</string>
+    <string name="poll_your_rate_of_water_per_day">Your rate of water consumption per day:</string>
+    <string name="poll_edit">Edit</string>
+
+    <!--    Another text    -->
+    <string name="text_next">Next</string>
+    <string name="text_back">Back</string>
+    <string name="text_apply">Apply</string>
+
 </resources>

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.login.LoginFragment"
+        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.auth.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -14,9 +14,10 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.registration.RegisterFragment"
+        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.auth.registration.RegisterFragment"
         android:label="RegisterFragment" />
 
     <include app:graph="@navigation/nav_main" />
+    <include app:graph="@navigation/nav_poll" />
 
 </navigation>
