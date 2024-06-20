@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.babiichuk.waterbalancetracker.storage.dao.UserDao
 import com.babiichuk.waterbalancetracker.storage.entity.BeveragesEntity
+import com.babiichuk.waterbalancetracker.storage.entity.CupEntity
 import com.babiichuk.waterbalancetracker.storage.entity.UserEntity
 
 private const val DB_NAME = "app_database"
 
-@Database(entities = [UserEntity::class, BeveragesEntity::class], version = 2, exportSchema = false)
+@Database(entities = [UserEntity::class, BeveragesEntity::class, CupEntity::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 

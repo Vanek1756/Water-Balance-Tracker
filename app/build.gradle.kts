@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.dagger.hilt)
-//    id("kotlin-kapt")
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.ksp)
@@ -72,13 +71,13 @@ dependencies {
     // Firebase
     implementation(libs.firebase.auth)
 
+    // Room
     implementation(libs.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
-}
+    // Joda-time
+    implementation(libs.joda.time)
 
-// Allow references to generated code
-//kapt {
-//    correctErrorTypes = true
-//}
+
+}
