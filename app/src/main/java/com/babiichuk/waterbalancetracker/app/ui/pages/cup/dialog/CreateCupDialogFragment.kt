@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.binding.bind
 import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
+import com.babiichuk.waterbalancetracker.app.ui.extensions.hideOrShowIf
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
 import com.babiichuk.waterbalancetracker.app.ui.pages.cup.NewCupViewModel
 import com.babiichuk.waterbalancetracker.databinding.DialogFragmentCreateCupBinding
@@ -59,6 +60,15 @@ class CreateCupDialogFragment : DialogFragment(R.layout.dialog_fragment_create_c
             dismiss()
         }
         btnSave.setOnClickListener { dismiss() }
+        btnDelete.setOnClickListener { onDeleteClicked() }
+    }
+
+    private fun onDeleteClicked() {
+//        lifecycleScope.launch {
+            viewModel.deleteBeverages()
+//            delay(100)
+            dismiss()
+//        }
     }
 
     private fun NewCupViewModel.subscribe() {
@@ -68,12 +78,10 @@ class CreateCupDialogFragment : DialogFragment(R.layout.dialog_fragment_create_c
         }
     }
 
+
     override fun onResume() {
         super.onResume()
-//        val window = dialog?.window
-//        val width =
-//            resources.displayMetrics.widthPixels - (2 * resources.getDimensionPixelSize(R.dimen.sport_dialog_horizontal_margin))
-//        window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+        binding.btnDelete.hideOrShowIf { viewModel.newCupName.value.isNullOrEmpty() }
     }
 
     override fun onDismiss(dialog: DialogInterface) {

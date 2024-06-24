@@ -28,6 +28,8 @@ class NewCupViewModel @Inject constructor(
     val newCupName = MutableStateFlow<String?>(null)
     val newCupVolume = MutableStateFlow<String?>(null)
 
+    private var beveragesId: Int? = null
+
     init {
         viewModelScope.launch {
             beveragesLoader.beveragesFlow.collectLatest {
@@ -48,16 +50,43 @@ class NewCupViewModel @Inject constructor(
     }
 
     fun addNewBeverages() {
-        val name = newCupName.value
-        val volume = newCupVolume.value
-        if (name == null || volume == null) return
+        if (newCupName.value == null || newCupVolume.value == null) return
+
+        val beverageName = newCupName.value.toString()
+        val volume = newCupVolume.value.toString()
+
         try {
-            val beverageName = name.toString()
             val beverageVolume = volume.toInt()
-            beveragesLoader.addNewBeverage(beverageName, beverageVolume)
+            beveragesLoader.addNewBeverage(beverageName, beverageVolume, beveragesId)
         } catch (e: Exception) {
             e.stackTrace
         }
+
+        clearBeveragesData()
+    }
+
+    fun onBeveragesClicked(beveragesId: Int) {
+        getBeveragesById(beveragesId)?.let { beverages ->
+            this.beveragesId = beveragesId
+            newCupName.value = beverages.type.ifEmpty { beverages.nameResId.toString() }
+            newCupVolume.value = beverages.volume.toString()
+        }
+    }
+
+    private fun getBeveragesById(beveragesId: Int): BeveragesEntity? {
+        return _entityMutableFlow.value
+            .map { it.value }
+            .filterIsInstance<BeveragesEntity>()
+            .find { it.id == beveragesId }
+    }
+
+    fun deleteBeverages() {
+        beveragesId?.let { beveragesLoader.deleteBeverages(it) }
+        clearBeveragesData()
+    }
+
+    private fun clearBeveragesData(){
+        beveragesId = null
         newCupName.value = null
         newCupVolume.value = null
     }

@@ -46,11 +46,14 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
 
     private val beveragesAdapter by lazy {
         AsyncListDiffDelegationAdapter(
-            beveragesAdapterDelegate {
-
-            },
+            beveragesAdapterDelegate { beveragesId -> onBeveragesClicked(beveragesId) },
             addNewFooterAdapterDelegate { openCreateBeveragesDialog() }
         )
+    }
+
+    private fun onBeveragesClicked(beveragesId: Int) {
+        viewModel.onBeveragesClicked(beveragesId)
+        openCreateBeveragesDialog()
     }
 
     @SuppressLint("RestrictedApi")
@@ -92,7 +95,6 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.setupBinding()
@@ -116,17 +118,14 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun saveAndDismiss() {
-        //TODO() logic for save new cups
         dismiss()
     }
-
 
     private fun openCreateBeveragesDialog() {
         val fragment = CreateCupDialogFragment.newInstance()
         fragment.onDismissCallback = { viewModel.addNewBeverages() }
         fragment.show(parentFragmentManager, CreateCupDialogFragment.TAG)
     }
-
 
     override fun onDismiss(dialog: DialogInterface) {
         onDismissCallback?.invoke()
