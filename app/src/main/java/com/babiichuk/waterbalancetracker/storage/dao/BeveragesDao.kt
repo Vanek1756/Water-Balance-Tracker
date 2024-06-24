@@ -15,6 +15,9 @@ interface BeveragesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBeverage(beveragesEntity: BeveragesEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertBeverages(beveragesList: List<BeveragesEntity>)
+
     @Query("SELECT * FROM beverages_table WHERE userId = :userId")
     fun getAllBeveragesByUserIdFlow(userId: String): Flow<List<BeveragesEntity>>
 

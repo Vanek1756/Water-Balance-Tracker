@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkAuthUser() {
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null){
+            viewModel.subscribeDataByUserId(currentUser.uid)
             startHomeFragment()
         }
     }

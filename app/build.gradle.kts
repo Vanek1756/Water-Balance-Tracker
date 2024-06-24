@@ -79,5 +79,7 @@ dependencies {
     // Joda-time
     implementation(libs.joda.time)
 
+    // Adapter Delegates
+    implementation(libs.adapterDelgates)
 
 }

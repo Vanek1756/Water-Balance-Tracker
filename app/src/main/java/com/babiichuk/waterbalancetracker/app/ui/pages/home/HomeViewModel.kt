@@ -9,6 +9,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val userLoader: UserLoader
 ) : BaseViewModel() {
+
+    val userFLow = userLoader.userInfoStateFlow
+
     fun signOut() {
         userLoader.signOut()
     }

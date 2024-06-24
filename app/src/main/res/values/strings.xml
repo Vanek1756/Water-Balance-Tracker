@@ -31,5 +31,27 @@
     <string name="text_next">Next</string>
     <string name="text_back">Back</string>
     <string name="text_apply">Apply</string>
+    <string name="text_log_out">Log out</string>
+    <string name="text_volume_ml">%1$s ml</string>
+
+
+    <!--    Home screen    -->
+    <string name="home_today">Today</string>
+    <string name="home_from_rate">From %1$.0f ml</string>
+    <string name="home_current_rate">%1$.0f ml</string>
+    <string name="text_save">Save</string>
+    <string name="text_add">Add</string>
+    <string name="text_beverages">Beverages</string>
+
+    <!--    Beverages text    -->
+    <string name="beverages_water">Water</string>
+    <string name="beverages_coffee">Coffee</string>
+    <string name="beverages_tea">Tea</string>
+    <string name="beverages_juice">Juice</string>
+    <string name="beverages_wine">Wine</string>
+    <string name="beverages_pepsi">Pepsi</string>
+    <string name="createCup_enterNameOfBeverages">Enter the name of the beverages</string>
+    <string name="createCup_enterVolumeOfDrink">Enter the volume of the drink</string>
+
 
 </resources>

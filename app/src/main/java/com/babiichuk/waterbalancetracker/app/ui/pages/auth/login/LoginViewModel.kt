@@ -7,8 +7,6 @@ import com.babiichuk.waterbalancetracker.app.ui.pages.BaseViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,7 +41,7 @@ class LoginViewModel @Inject constructor(
             Firebase.auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        userLoader.getOrInsertUser(Firebase.auth.currentUser)
+                        userLoader.checkAndInsertUser(Firebase.auth.currentUser)
                     } else {
                         onError(task.exception?.localizedMessage ?: "Authentication failed.")
                     }

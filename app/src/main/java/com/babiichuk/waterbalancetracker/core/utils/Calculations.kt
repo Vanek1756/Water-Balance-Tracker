@@ -1,4 +1,4 @@
-package com.babiichuk.waterbalancetracker.utils
+package com.babiichuk.waterbalancetracker.core.utils
 
 import com.babiichuk.waterbalancetracker.app.ui.utils.GenderType
 

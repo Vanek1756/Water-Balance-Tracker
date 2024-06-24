@@ -16,6 +16,7 @@ firebaseAuth = "23.0.0"
 ksp = "2.0.0-1.0.22"
 roomVersion = "2.6.1"
 jodaTime = "2.12.7"
+adapterDelegates = "4.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +36,7 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 joda-time = { group = "joda-time", name = "joda-time", version.ref = "jodaTime" }
+adapterDelgates = { group = "com.hannesdorfmann", name = "adapterdelegates4-kotlin-dsl-layoutcontainer", version.ref = "adapterDelegates" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

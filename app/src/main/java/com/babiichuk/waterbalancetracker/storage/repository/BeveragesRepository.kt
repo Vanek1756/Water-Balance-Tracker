@@ -13,6 +13,10 @@ class BeveragesRepository @Inject constructor(private val beveragesDao: Beverage
         beveragesDao.insertBeverage(beveragesEntity)
     }
 
+    suspend fun insertBeverages(beveragesList: List<BeveragesEntity>) {
+        beveragesDao.insertBeverages(beveragesList)
+    }
+
     fun getBeveragesFlow(userId: String): Flow<List<BeveragesEntity>> {
         return beveragesDao.getAllBeveragesByUserIdFlow(userId)
     }

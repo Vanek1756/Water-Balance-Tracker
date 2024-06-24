@@ -9,7 +9,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
@@ -28,17 +31,27 @@ class UserLoader @Inject constructor(
     private val _userInfoMutableStateFlow: MutableStateFlow<UserEntity?> = MutableStateFlow(null)
     val userInfoStateFlow = _userInfoMutableStateFlow.asStateFlow()
 
-    fun getOrInsertUser(currentUser: FirebaseUser?){
+    private val _authFinishedSharedFlow: MutableSharedFlow<String> =
+        MutableSharedFlow(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val authFinishedFlow = _authFinishedSharedFlow.asSharedFlow()
+
+    fun checkAndInsertUser(currentUser: FirebaseUser?) {
         if (currentUser == null) return
         scopeIo.launch {
             val isUserExists = userRepository.isUserExists(currentUser.uid)
-            if (isUserExists){
-                getUserById(currentUser.uid)
-            } else {
+            if (!isUserExists) {
                 insertUser(currentUser)
+            } else {
+                _authFinishedSharedFlow.tryEmit(currentUser.uid)
             }
+//            if (isUserExists){
+//                subscribeDataByUserId(currentUser.uid)
+//            } else {
+//                insertUser(currentUser)
+//            }
         }
     }
+
     fun insertUser(currentUser: FirebaseUser?) {
         if (currentUser == null) return
 
@@ -50,7 +63,8 @@ class UserLoader @Inject constructor(
         _userInfoMutableStateFlow.update { userEntity }
         scopeIo.launch {
             userRepository.insert(userEntity)
-            getUserById(userEntity.id)
+            _authFinishedSharedFlow.tryEmit(userEntity.id)
+//            subscribeDataByUserId(userEntity.id)
         }
     }
 
@@ -60,7 +74,7 @@ class UserLoader @Inject constructor(
             Firebase.auth.currentUser?.updateProfile(newData)
 
             _userInfoMutableStateFlow
-                .updateAndGet { it?.copy (name = name, gender = gender)}
+                .updateAndGet { it?.copy(name = name, gender = gender) }
                 ?.apply { userRepository.insert(this) }
         }
     }
@@ -68,7 +82,7 @@ class UserLoader @Inject constructor(
     fun insertUserAgeAndWeight(age: Int, weight: Int) {
         scopeIo.launch {
             _userInfoMutableStateFlow
-                .updateAndGet { it?.copy(age = age, weight = weight)}
+                .updateAndGet { it?.copy(age = age, weight = weight) }
                 ?.apply { userRepository.insert(this) }
         }
     }
@@ -76,12 +90,12 @@ class UserLoader @Inject constructor(
     fun insertWaterRate(waterRate: Double) {
         scopeIo.launch {
             _userInfoMutableStateFlow
-                .updateAndGet { it?.copy(waterRate = waterRate) }
+                .updateAndGet { it?.copy(recommendedWaterRate = waterRate) }
                 ?.let { userRepository.insert(it) }
         }
     }
 
-    fun getUserById(userId: String) {
+    fun subscribeDataByUserId(userId: String) {
         scopeIo.launch {
             userRepository.getUserById(userId).collectLatest { userEntity ->
                 _userInfoMutableStateFlow.value = userEntity

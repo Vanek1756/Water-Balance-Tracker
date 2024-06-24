@@ -8,12 +8,10 @@ import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseFragment
+import com.babiichuk.waterbalancetracker.app.ui.pages.cup.NewCupBottomSheetFragment
 import com.babiichuk.waterbalancetracker.databinding.FragmentHomeBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.babiichuk.waterbalancetracker.storage.entity.UserEntity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -34,11 +32,13 @@ class HomeFragment  : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun FragmentHomeBinding.setupBinding(){
-        Firebase.auth.currentUser?.apply {
-            tvUserInfo.text = this.email
-        }
-
         btnLogUot.setOnClickListener { signOut() }
+        btnAddCup.setOnClickListener { openNewCupBottomSheet() }
+    }
+
+    private fun openNewCupBottomSheet() {
+        val fragment = NewCupBottomSheetFragment.newInstance()
+        fragment.show(parentFragmentManager, NewCupBottomSheetFragment.TAG)
     }
 
     private fun signOut() {
@@ -48,7 +48,16 @@ class HomeFragment  : BaseFragment(R.layout.fragment_home) {
 
     private fun HomeViewModel.subscribe(){
         launchOnLifecycle(Lifecycle.State.STARTED) {
+            launch { userFLow.collect{
+                it?.let { bindWaterRate(it) } }
+            }
+        }
+    }
 
+    private fun bindWaterRate(user: UserEntity) {
+        binding.apply {
+            tvRecommendedAmount.text = getString(R.string.home_from_rate, user.recommendedWaterRate)
+            tvCurrentAmount.text = getString(R.string.home_current_rate, user.currentWaterRate)
         }
     }
 

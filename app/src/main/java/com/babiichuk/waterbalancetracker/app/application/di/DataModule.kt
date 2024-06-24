@@ -1,6 +1,7 @@
 package com.babiichuk.waterbalancetracker.app.application.di
 
 import android.content.Context
+import com.babiichuk.waterbalancetracker.storage.dao.BeveragesDao
 import com.babiichuk.waterbalancetracker.storage.dao.UserDao
 import com.babiichuk.waterbalancetracker.storage.database.AppDatabase
 import dagger.Module
@@ -20,8 +21,13 @@ class DataModule {
         AppDatabase.getDatabase(context)
 
     @Provides
-    fun provideBetDao(database: AppDatabase): UserDao {
+    fun provideUserDao(database: AppDatabase): UserDao {
         return database.userDao()
+    }
+
+    @Provides
+    fun provideBeveragesDao(database: AppDatabase): BeveragesDao {
+        return database.beveragesDao()
     }
 
 }
