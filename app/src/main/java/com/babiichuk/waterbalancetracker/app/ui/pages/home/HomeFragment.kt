@@ -32,18 +32,12 @@ class HomeFragment  : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun FragmentHomeBinding.setupBinding(){
-        btnLogUot.setOnClickListener { signOut() }
         btnAddCup.setOnClickListener { openNewCupBottomSheet() }
     }
 
     private fun openNewCupBottomSheet() {
         val fragment = NewCupBottomSheetFragment.newInstance()
         fragment.show(parentFragmentManager, NewCupBottomSheetFragment.TAG)
-    }
-
-    private fun signOut() {
-        viewModel.signOut()
-        navigateTo(R.id.nav_login)
     }
 
     private fun HomeViewModel.subscribe(){

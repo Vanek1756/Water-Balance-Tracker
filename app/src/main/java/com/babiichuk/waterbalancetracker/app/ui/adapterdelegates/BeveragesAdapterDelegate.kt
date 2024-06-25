@@ -27,7 +27,7 @@ fun beveragesAdapterDelegate(
 
     bind {
         binding.apply {
-            val name = item.value.type.ifEmpty { getString(item.value.nameResId) }
+            val name = item.value.nameString.ifEmpty { getString(item.value.nameResId) }
             tvName.text = name
             tvVolume.text = getString(R.string.text_volume_ml, item.value.volume)
             ivIcon.setImageResource(item.value.iconId)

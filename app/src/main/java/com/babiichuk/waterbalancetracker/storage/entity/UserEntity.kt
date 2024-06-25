@@ -6,13 +6,12 @@ import com.babiichuk.waterbalancetracker.app.ui.utils.GenderType
 
 @Entity(tableName = "user_table")
 data class UserEntity(
-    @PrimaryKey
-    val id: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val name: String,
     val age: Int,
     val weight: Int,
     val gender: GenderType,
-    val email: String,
     val recommendedWaterRate: Double,
     val currentWaterRate: Double
 ) {
@@ -26,14 +25,12 @@ data class UserEntity(
     }
     companion object Factory {
 
-        fun create(id: String, email: String?, name: String?): UserEntity {
+        fun create(name: String, gender: GenderType): UserEntity {
             return UserEntity(
-                id = id,
-                name = name ?: "",
+                name = name,
                 age = 0,
                 weight = 0,
-                gender = GenderType.UNKNOWN,
-                email = email ?: "",
+                gender = gender,
                 recommendedWaterRate = 0.0,
                 currentWaterRate = 0.0
             )

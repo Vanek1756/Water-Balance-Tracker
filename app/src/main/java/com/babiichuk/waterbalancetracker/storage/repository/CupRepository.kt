@@ -7,12 +7,12 @@ import javax.inject.Inject
 
 class CupRepository @Inject constructor(private val beveragesDao: BeveragesDao) {
 
-    fun getCupsFlow(userId: String): Flow<List<CupEntity>> {
-        return beveragesDao.getAllCupsByUserIdFlow(userId)
+    fun getCupsFlow(): Flow<List<CupEntity>> {
+        return beveragesDao.getAllCupsByUserIdFlow()
     }
 
-    suspend fun getCups(userId: String): List<CupEntity> {
-        return beveragesDao.getAllCupsByUserId(userId)
+    suspend fun getCups(): List<CupEntity> {
+        return beveragesDao.getAllCupsByUserId()
     }
 
     suspend fun insertCup(cup: CupEntity) {

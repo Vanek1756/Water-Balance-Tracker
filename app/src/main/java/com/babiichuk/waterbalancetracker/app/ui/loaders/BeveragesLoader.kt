@@ -27,12 +27,9 @@ class BeveragesLoader @Inject constructor(
 
     private val scopeIo = CoroutineScope(Dispatchers.IO)
 
-    private var userId: String = "user"
-
-    fun subscribeDataByUserId(userId: String) {
-        this.userId = userId
+    fun subscribeData(){
         scopeIo.launch {
-            beveragesRepository.getBeveragesFlow(userId).collectLatest { beveragesList ->
+            beveragesRepository.getBeveragesFlow().collectLatest { beveragesList ->
                 collectBeverages(beveragesList)
             }
         }
@@ -51,7 +48,6 @@ class BeveragesLoader @Inject constructor(
         DefaultBeveragesType.entries.forEach { type ->
             beveragesList.add(
                 BeveragesEntity.create(
-                    userId,
                     type.nameResId,
                     R.drawable.ic_cup,
                     BeveragesEntity.DEFAULT_BEVERAGES_VOLUME
@@ -63,7 +59,7 @@ class BeveragesLoader @Inject constructor(
 
     fun addNewBeverage(type: String, volume: Int, id: Int?) {
         scopeIo.launch {
-            val newBeverages = BeveragesEntity.create(id?:0, userId, type, R.drawable.ic_cup, volume)
+            val newBeverages = BeveragesEntity.create(id?:0, type, R.drawable.ic_cup, volume)
             beveragesRepository.insertBeverage(newBeverages)
         }
     }

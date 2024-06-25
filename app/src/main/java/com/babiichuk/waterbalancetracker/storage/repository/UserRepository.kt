@@ -12,11 +12,7 @@ class UserRepository @Inject constructor(private val userDao: UserDao) {
         userDao.insert(user)
     }
 
-    fun getUserById(userId: String): Flow<UserEntity> {
-        return userDao.getUserById(userId)
-    }
-
-    suspend fun isUserExists(userId: String): Boolean {
-        return userDao.isUserExists(userId)
+    fun getUserFlow(): Flow<UserEntity?> {
+        return userDao.getUserFlow()
     }
 }

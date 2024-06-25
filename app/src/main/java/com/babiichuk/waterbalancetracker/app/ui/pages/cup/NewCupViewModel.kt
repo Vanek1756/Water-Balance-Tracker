@@ -68,7 +68,7 @@ class NewCupViewModel @Inject constructor(
     fun onBeveragesClicked(beveragesId: Int) {
         getBeveragesById(beveragesId)?.let { beverages ->
             this.beveragesId = beveragesId
-            newCupName.value = beverages.type.ifEmpty { beverages.nameResId.toString() }
+            newCupName.value = beverages.nameString.ifEmpty { beverages.nameResId.toString() }
             newCupVolume.value = beverages.volume.toString()
         }
     }

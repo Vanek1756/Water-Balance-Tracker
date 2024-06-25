@@ -8,8 +8,7 @@ import com.babiichuk.waterbalancetracker.R
 data class BeveragesEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val userId: String,
-    val type: String = "",
+    val nameString: String = "",
     val nameResId: Int = 0,
     val iconId: Int,
     val volume: Int
@@ -17,19 +16,17 @@ data class BeveragesEntity(
     companion object Factory {
         const val DEFAULT_BEVERAGES_VOLUME: Int = 200
 
-        fun create(id: Int = 0, userId: String, type: String, iconId: Int, volume: Int): BeveragesEntity {
+        fun create(id: Int = 0, type: String, iconId: Int, volume: Int): BeveragesEntity {
             return BeveragesEntity(
                 id = id,
-                userId = userId,
-                type = type,
+                nameString = type,
                 iconId = iconId,
                 volume = volume
             )
         }
 
-        fun create(userId: String, type: Int, iconId: Int, volume: Int): BeveragesEntity {
+        fun create(type: Int, iconId: Int, volume: Int): BeveragesEntity {
             return BeveragesEntity(
-                userId = userId,
                 nameResId = type,
                 iconId = iconId,
                 volume = volume

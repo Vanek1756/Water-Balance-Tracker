@@ -12,7 +12,7 @@ import com.babiichuk.waterbalancetracker.storage.entity.UserEntity
 
 private const val DB_NAME = "app_database"
 
-@Database(entities = [UserEntity::class, BeveragesEntity::class, CupEntity::class], version = 4, exportSchema = false)
+@Database(entities = [UserEntity::class, BeveragesEntity::class, CupEntity::class], version = 6, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun beveragesDao(): BeveragesDao

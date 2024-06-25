@@ -33,7 +33,6 @@ class NameAndGenderFragment : BaseFragment(R.layout.fragment_name_and_gender) {
     }
 
     private fun FragmentNameAndGenderBinding.setupBinding(){
-        tvBack.setOnClickListener { navigateUp() }
         rbMan.setOnClickListener { btnNext.isEnabled = true }
         rbWoman.setOnClickListener { btnNext.isEnabled = true }
         btnNext.setOnClickListener { onNextClicked() }

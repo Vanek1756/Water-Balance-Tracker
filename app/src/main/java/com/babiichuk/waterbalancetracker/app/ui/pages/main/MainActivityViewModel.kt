@@ -1,12 +1,9 @@
 package com.babiichuk.waterbalancetracker.app.ui.pages.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.babiichuk.waterbalancetracker.app.ui.loaders.BeveragesLoader
 import com.babiichuk.waterbalancetracker.app.ui.loaders.UserLoader
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,16 +13,11 @@ class MainActivityViewModel @Inject constructor(
 ) : ViewModel() {
 
     val userFlow = userLoader.userInfoStateFlow
+    val userIsExistFlow = userLoader.userIsExistFlow
 
-    init {
-        viewModelScope.launch {
-            userLoader.authFinishedFlow.collectLatest { subscribeDataByUserId(it) }
-        }
-    }
-
-    fun subscribeDataByUserId(userId: String) {
-        userLoader.subscribeDataByUserId(userId)
-        beveragesLoader.subscribeDataByUserId(userId)
+    fun subscribeData() {
+        userLoader.subscribeData()
+        beveragesLoader.subscribeData()
     }
 
 }

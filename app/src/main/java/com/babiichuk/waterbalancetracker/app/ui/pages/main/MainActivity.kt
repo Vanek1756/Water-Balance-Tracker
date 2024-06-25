@@ -1,7 +1,6 @@
 package com.babiichuk.waterbalancetracker.app.ui.pages.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.databinding.ActivityMainBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -27,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel: MainActivityViewModel by viewModels()
 
-    private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,23 +36,13 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcvMain) as NavHostFragment
         navController = navHostFragment.navController
 
-        firebaseAuth = Firebase.auth
-
         binding.setupBinding()
         viewModel.subscribe()
-        checkAuthUser()
+        viewModel.subscribeData()
     }
 
-    private fun checkAuthUser() {
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null){
-            viewModel.subscribeDataByUserId(currentUser.uid)
-            startHomeFragment()
-        }
-    }
-
-    private fun startHomeFragment() {
-       navController.navigate(R.id.nav_main)
+    private fun startHomeFragments() {
+        navController.navigate(R.id.nav_main)
     }
 
     private fun ActivityMainBinding.setupBinding(){
@@ -68,7 +52,11 @@ class MainActivity : AppCompatActivity() {
     private fun MainActivityViewModel.subscribe(){
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch { userFlow.collectLatest { Log.e("USER", "subscribe: $it", ) } }
+                launch {
+                    userIsExistFlow.collect {
+                        if (it) startHomeFragments()
+                    }
+                }
             }
         }
     }

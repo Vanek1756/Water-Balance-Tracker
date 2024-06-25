@@ -13,7 +13,7 @@ class HomeViewModel @Inject constructor(
     val userFLow = userLoader.userInfoStateFlow
 
     fun signOut() {
-        userLoader.signOut()
+//        userLoader.signOut()
     }
 
 }

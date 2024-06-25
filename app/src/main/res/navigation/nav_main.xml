@@ -13,7 +13,9 @@
 <!--            app:destination="@id/nav_login" />-->
     </fragment>
 
-<!--    <include app:graph="@navigation/nav_login" />-->
+<!--    <include app:graph="@navigation/nav_poll" />-->
+
+    <!--    <include app:graph="@navigation/nav_login" />-->
 
 
 </navigation>

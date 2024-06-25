@@ -8,8 +8,9 @@ import org.joda.time.DateTime
 data class CupEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val userId: String,
-    val type: String,
+    val beveragesId: Int,
+    val nameString: String,
+    val nameResId: Int,
     val iconId: Int,
     val volume: Int,
     val dateTime: String
@@ -18,8 +19,9 @@ data class CupEntity(
 
         fun create(beverages: BeveragesEntity): CupEntity {
             return CupEntity(
-                userId = beverages.userId,
-                type = beverages.type,
+                beveragesId = beverages.id,
+                nameString = beverages.nameString,
+                nameResId = beverages.nameResId,
                 iconId = beverages.iconId,
                 volume = beverages.volume,
                 dateTime = DateTime.now().toString()

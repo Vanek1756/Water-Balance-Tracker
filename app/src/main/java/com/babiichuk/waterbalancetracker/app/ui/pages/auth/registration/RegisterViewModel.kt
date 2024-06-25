@@ -44,7 +44,7 @@ class RegisterViewModel @Inject constructor(
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     accountIsCreatedFlow.tryEmit("success")
-                    userLoader.insertUser(Firebase.auth.currentUser)
+//                    userLoader.insertUser(Firebase.auth.currentUser)
                 } else {
                     onError(task.exception?.localizedMessage ?: "Authentication failed.")
                 }

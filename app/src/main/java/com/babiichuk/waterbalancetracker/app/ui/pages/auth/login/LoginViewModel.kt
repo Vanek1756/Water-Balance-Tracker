@@ -41,7 +41,7 @@ class LoginViewModel @Inject constructor(
             Firebase.auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        userLoader.checkAndInsertUser(Firebase.auth.currentUser)
+//                        userLoader.checkAndInsertUser(Firebase.auth.currentUser)
                     } else {
                         onError(task.exception?.localizedMessage ?: "Authentication failed.")
                     }
