@@ -23,10 +23,10 @@ suspend fun MutableStateFlow<String?>.bind(filed: TextInputEditText) {
 }
 
 @JvmName("bindTextInputField-Double")
-suspend fun MutableStateFlow<Double>.bind(filed: TextInputEditText) {
+suspend fun MutableStateFlow<Int>.bind(filed: TextInputEditText) {
     val watcher = SimpleTextWatcher(afterTextChanged = {
         try {
-            val newValue =  getTextString(filed).toString().toDouble()
+            val newValue =  getTextString(filed).toString().toInt()
             if (newValue != value) {
                 value = newValue
             }

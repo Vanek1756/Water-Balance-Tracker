@@ -19,7 +19,7 @@ class CalculationViewModel @Inject constructor(
         userLoader.insertWaterRate(rateWater.value)
     }
 
-    private fun calculateDailyWaterRate(): Double {
+    private fun calculateDailyWaterRate(): Int {
         var result = DEFAULT_WATER_RATE
         userLoader.userInfoStateFlow.value?.let {
             result = calculateDailyWaterIntake(it.gender,it.age, it.weight)

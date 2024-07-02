@@ -2,7 +2,7 @@ package com.babiichuk.waterbalancetracker.core.utils
 
 import com.babiichuk.waterbalancetracker.app.ui.utils.GenderType
 
-fun calculateDailyWaterIntake(gender: GenderType, age: Int, weight: Int): Double {
+fun calculateDailyWaterIntake(gender: GenderType, age: Int, weight: Int): Int {
     // Основна потреба у воді на основі ваги (мл/кг)
     val baseWaterIntakePerKg: Double = if (gender == GenderType.MAN) 35.0 else 31.0
 
@@ -19,5 +19,5 @@ fun calculateDailyWaterIntake(gender: GenderType, age: Int, weight: Int): Double
     // Коригована потреба у воді
     val adjustedWaterIntake: Double = baseWaterIntake * ageFactor
 
-    return adjustedWaterIntake
+    return Math.round(adjustedWaterIntake).toInt()
 }

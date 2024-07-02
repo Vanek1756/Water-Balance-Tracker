@@ -71,9 +71,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun bindWaterRate(user: UserEntity) {
+        val recommendedRate =  user.recommendedWaterRate
+        val currentRate =  user.currentWaterRate
         binding.apply {
-            tvRecommendedAmount.text = getString(R.string.home_from_rate, user.recommendedWaterRate)
-            tvCurrentAmount.text = getString(R.string.home_current_rate, user.currentWaterRate)
+            tvRecommendedAmount.text = getString(R.string.home_from_rate, recommendedRate)
+            tvCurrentAmount.text = getString(R.string.home_current_rate, currentRate)
+            waterProgress.max = recommendedRate
+            waterProgress.setProgress(currentRate, true)
         }
     }
 

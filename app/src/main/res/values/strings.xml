@@ -37,8 +37,8 @@
 
     <!--    Home screen    -->
     <string name="home_today">Today</string>
-    <string name="home_from_rate">From %1$.0f ml</string>
-    <string name="home_current_rate">%1$.0f ml</string>
+    <string name="home_from_rate">From %1$s ml</string>
+    <string name="home_current_rate">%1$s ml</string>
     <string name="text_save">Save</string>
     <string name="text_add">Add</string>
     <string name="text_beverages">Beverages</string>

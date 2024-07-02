@@ -66,7 +66,7 @@ class UserLoader @Inject constructor(
         _userInfoMutableStateFlow.update { it?.copy(age = age, weight = weight) }
     }
 
-    fun insertWaterRate(waterRate: Double) {
+    fun insertWaterRate(waterRate: Int) {
         scopeIo.launch {
             _userInfoMutableStateFlow
                 .updateAndGet { it?.copy(recommendedWaterRate = waterRate) }
@@ -77,7 +77,7 @@ class UserLoader @Inject constructor(
     fun updateVolume(newVolume: Int) {
         scopeIo.launch {
             _userInfoMutableStateFlow
-                .updateAndGet { it?.copy(currentWaterRate = newVolume.toDouble()) }
+                .updateAndGet { it?.copy(currentWaterRate = newVolume) }
                 ?.let { userRepository.insert(it) }
         }
     }
