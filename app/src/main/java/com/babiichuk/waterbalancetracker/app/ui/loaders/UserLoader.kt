@@ -35,6 +35,27 @@ class UserLoader @Inject constructor(
             }
         }
     }
+//
+//    fun subscribeData() {
+//        scopeIo.launch {
+//            combine(
+//                userRepository.getUserFlow(),
+//                cupRepository.getAllCupsForTodayFlow(getTodayDate())
+//            ) { user, listOfCups ->
+//                collectUserAndCups(user,listOfCups)
+//            }.collect()
+//        }
+//    }
+//
+//    private fun collectUserAndCups(user: UserEntity?, listOfCups: List<CupEntity>) {
+//        _userIsExistMutableFlow.update { user != null }
+//        user?.let { userEntity ->
+//            val currentWaterRate = listOfCups.sumOf { it.volume }
+//            _userInfoMutableStateFlow.update {
+//                userEntity.copy(currentWaterRate = currentWaterRate.toDouble())
+//            }
+//        }
+//    }
 
     fun insertUserNameAndGender(name: String, gender: GenderType) {
         val newUser = UserEntity.create(name, gender)
@@ -49,6 +70,14 @@ class UserLoader @Inject constructor(
         scopeIo.launch {
             _userInfoMutableStateFlow
                 .updateAndGet { it?.copy(recommendedWaterRate = waterRate) }
+                ?.let { userRepository.insert(it) }
+        }
+    }
+
+    fun updateVolume(newVolume: Int) {
+        scopeIo.launch {
+            _userInfoMutableStateFlow
+                .updateAndGet { it?.copy(currentWaterRate = newVolume.toDouble()) }
                 ?.let { userRepository.insert(it) }
         }
     }

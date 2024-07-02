@@ -3,7 +3,9 @@ package com.babiichuk.waterbalancetracker.app.ui.adapterdelegates
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.utils.adapterdelegates.diffAdapterDelegateLayoutContainer
 import com.babiichuk.waterbalancetracker.core.entity.AddNewFooter
+import com.babiichuk.waterbalancetracker.core.utils.State
 import com.babiichuk.waterbalancetracker.core.utils.StateHolder
+import com.babiichuk.waterbalancetracker.core.utils.getStateOrFalse
 import com.babiichuk.waterbalancetracker.databinding.ItemAddNewFooterBinding
 import com.babiichuk.waterbalancetracker.databinding.ItemBeveragesBinding
 import com.babiichuk.waterbalancetracker.storage.entity.BeveragesEntity
@@ -27,6 +29,10 @@ fun beveragesAdapterDelegate(
 
     bind {
         binding.apply {
+            val isSelected = item.getStateOrFalse(State.SELECTED)
+            val colorCardId = if (isSelected) R.color.blue else R.color.gray
+            cardView.setCardBackgroundColor(getColor(colorCardId))
+
             val name = item.value.nameString.ifEmpty { getString(item.value.nameResId) }
             tvName.text = name
             tvVolume.text = getString(R.string.text_volume_ml, item.value.volume)
@@ -40,8 +46,8 @@ fun addNewFooterAdapterDelegate(
 ) = diffAdapterDelegateLayoutContainer<StateHolder<AddNewFooter>, Any>(
     layout = R.layout.item_add_new_footer,
     on = { item, _, _ -> item is StateHolder<*> && item.value is AddNewFooter },
-    same = { oldItem, newItem -> oldItem.value.id == newItem.value.id },
-    contentEquals = { oldItem, newItem -> oldItem == newItem },
+//    same = { oldItem, newItem -> oldItem.value.id == newItem.value.id },
+//    contentEquals = { oldItem, newItem -> oldItem == newItem },
     changePayload = { _, _ ->
         mutableSetOf<String>().apply {
             add("ITEMS_CHANGED")

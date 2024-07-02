@@ -64,11 +64,8 @@ class CreateCupDialogFragment : DialogFragment(R.layout.dialog_fragment_create_c
     }
 
     private fun onDeleteClicked() {
-//        lifecycleScope.launch {
             viewModel.deleteBeverages()
-//            delay(100)
             dismiss()
-//        }
     }
 
     private fun NewCupViewModel.subscribe() {

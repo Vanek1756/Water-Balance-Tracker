@@ -13,17 +13,19 @@ data class CupEntity(
     val nameResId: Int,
     val iconId: Int,
     val volume: Int,
+    val intervalId: Int,
     val dateTime: String
 ){
     companion object Factory {
 
-        fun create(beverages: BeveragesEntity): CupEntity {
+        fun create(beverages: BeveragesEntity, intervalId: Int): CupEntity {
             return CupEntity(
                 beveragesId = beverages.id,
                 nameString = beverages.nameString,
                 nameResId = beverages.nameResId,
                 iconId = beverages.iconId,
                 volume = beverages.volume,
+                intervalId = intervalId,
                 dateTime = DateTime.now().toString()
             )
         }

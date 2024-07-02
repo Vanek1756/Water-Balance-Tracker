@@ -50,8 +50,17 @@
     <string name="beverages_juice">Juice</string>
     <string name="beverages_wine">Wine</string>
     <string name="beverages_pepsi">Pepsi</string>
+
+
+    <!--    Create cup screen    -->
     <string name="createCup_enterNameOfBeverages">Enter the name of the beverages</string>
     <string name="createCup_enterVolumeOfDrink">Enter the volume of the drink</string>
+
+
+    <!--    Interval text    -->
+    <string name="interval_breakfast">Before breakfast %1$s from to %2$s</string>
+    <string name="interval_lunch">Before lunch %1$s from to %2$s</string>
+    <string name="interval_dinner">Before dinner %1$s from to %2$s</string>
 
 
 </resources>

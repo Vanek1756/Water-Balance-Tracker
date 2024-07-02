@@ -16,7 +16,7 @@ data class BeveragesEntity(
     companion object Factory {
         const val DEFAULT_BEVERAGES_VOLUME: Int = 200
 
-        fun create(id: Int = 0, type: String, iconId: Int, volume: Int): BeveragesEntity {
+        fun create(id: Int, type: String, iconId: Int, volume: Int): BeveragesEntity {
             return BeveragesEntity(
                 id = id,
                 nameString = type,

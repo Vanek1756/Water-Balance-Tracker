@@ -19,10 +19,10 @@ interface BeveragesDao {
     suspend fun insertBeverages(beveragesList: List<BeveragesEntity>)
 
     @Query("SELECT * FROM beverages_table")
-    fun getAllBeveragesByUserIdFlow(): Flow<List<BeveragesEntity>>
+    fun getAllBeveragesFlow(): Flow<List<BeveragesEntity>>
 
     @Query("SELECT * FROM beverages_table")
-    suspend fun getAllBeveragesByUserId(): List<BeveragesEntity>
+    suspend fun getAllBeverages(): List<BeveragesEntity>
 
     @Query("DELETE FROM beverages_table WHERE id = :id")
     suspend fun deleteBeverageById(id: Int)
@@ -34,11 +34,17 @@ interface BeveragesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCup(cup: CupEntity)
 
-    @Query("SELECT * FROM cup_table")
-    fun getAllCupsByUserIdFlow(): Flow<List<CupEntity>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCups(cups: List<CupEntity>)
 
     @Query("SELECT * FROM cup_table")
-    suspend fun getAllCupsByUserId(): List<CupEntity>
+    fun getAllCupsFlow(): Flow<List<CupEntity>>
+
+    @Query("SELECT * FROM cup_table WHERE date(dateTime) = date(:today)")
+    fun getAllCupsForTodayFlow(today: String): Flow<List<CupEntity>>
+
+    @Query("SELECT * FROM cup_table")
+    suspend fun getAllCups(): List<CupEntity>
 
     @Query("DELETE FROM cup_table WHERE id = :id")
     suspend fun deleteCupById(id: Int)

@@ -2,10 +2,14 @@ package com.babiichuk.waterbalancetracker.app.ui.pages.cup
 
 import androidx.lifecycle.viewModelScope
 import com.babiichuk.waterbalancetracker.app.ui.loaders.BeveragesLoader
+import com.babiichuk.waterbalancetracker.app.ui.loaders.CupLoader
 import com.babiichuk.waterbalancetracker.app.ui.loaders.UserLoader
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseViewModel
 import com.babiichuk.waterbalancetracker.core.entity.AddNewFooter
+import com.babiichuk.waterbalancetracker.core.utils.State
 import com.babiichuk.waterbalancetracker.core.utils.StateHolder
+import com.babiichuk.waterbalancetracker.core.utils.getStateOrFalse
+import com.babiichuk.waterbalancetracker.core.utils.propertyChange
 import com.babiichuk.waterbalancetracker.storage.entity.BeveragesEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,8 +22,12 @@ import javax.inject.Inject
 @HiltViewModel
 class NewCupViewModel @Inject constructor(
     private val userLoader: UserLoader,
-    private val beveragesLoader: BeveragesLoader
+    private val beveragesLoader: BeveragesLoader,
+    private val cupsLoader: CupLoader
 ) : BaseViewModel() {
+
+    private val _beveragesMutableFLow: MutableStateFlow<List<StateHolder<BeveragesEntity>>> =
+        MutableStateFlow(emptyList())
 
     private val _entityMutableFlow: MutableStateFlow<List<StateHolder<*>>> =
         MutableStateFlow(emptyList())
@@ -28,19 +36,22 @@ class NewCupViewModel @Inject constructor(
     val newCupName = MutableStateFlow<String?>(null)
     val newCupVolume = MutableStateFlow<String?>(null)
 
+    var intervalId: Int? = null
+
     private var beveragesId: Int? = null
 
     init {
         viewModelScope.launch {
-            beveragesLoader.beveragesFlow.collectLatest {
-                updateBeverages(it)
+            beveragesLoader.beveragesFlow.collectLatest { beveragesList ->
+                _beveragesMutableFLow.update { beveragesList }
+                updateBeverages()
             }
         }
     }
 
-    private fun updateBeverages(list: List<StateHolder<BeveragesEntity>>) {
+    private fun updateBeverages() {
         val listOfEntity = mutableListOf<StateHolder<*>>()
-        listOfEntity.addAll(list)
+        listOfEntity.addAll(_beveragesMutableFLow.value)
         listOfEntity.add(createFooter())
         _entityMutableFlow.update { listOfEntity }
     }
@@ -66,11 +77,16 @@ class NewCupViewModel @Inject constructor(
     }
 
     fun onBeveragesClicked(beveragesId: Int) {
-        getBeveragesById(beveragesId)?.let { beverages ->
-            this.beveragesId = beveragesId
-            newCupName.value = beverages.nameString.ifEmpty { beverages.nameResId.toString() }
-            newCupVolume.value = beverages.volume.toString()
+        _beveragesMutableFLow.update { currentList ->
+            currentList.map { beveragesHolder ->
+                if (beveragesHolder.value.id != beveragesId) return@map beveragesHolder
+
+                beveragesHolder.propertyChange(State.SELECTED) {
+                    !beveragesHolder.getStateOrFalse(State.SELECTED)
+                }
+            }
         }
+        updateBeverages()
     }
 
     private fun getBeveragesById(beveragesId: Int): BeveragesEntity? {
@@ -85,9 +101,16 @@ class NewCupViewModel @Inject constructor(
         clearBeveragesData()
     }
 
-    private fun clearBeveragesData(){
+    private fun clearBeveragesData() {
         beveragesId = null
         newCupName.value = null
         newCupVolume.value = null
+    }
+
+    fun addCupsToInterval() {
+        val listOfCups = _beveragesMutableFLow.value
+            .filter { it.getStateOrFalse(State.SELECTED) }
+            .map { it.value }
+        intervalId?.let { cupsLoader.insertCups(listOfCups, it) }
     }
 }

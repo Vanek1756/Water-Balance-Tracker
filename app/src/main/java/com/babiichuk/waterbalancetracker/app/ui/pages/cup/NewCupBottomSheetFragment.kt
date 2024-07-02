@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.core.os.bundleOf
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -36,9 +37,12 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG: String = "NewCupBottomSheetFragment"
+        private const val ARG_INTERVAL_ID = "ARG_INTERVAL_ID"
 
-        fun newInstance(): NewCupBottomSheetFragment {
-            return NewCupBottomSheetFragment()
+        fun newInstance(intervalId: Int): NewCupBottomSheetFragment {
+            return NewCupBottomSheetFragment().apply {
+                arguments = bundleOf(ARG_INTERVAL_ID to intervalId)
+            }
         }
     }
 
@@ -46,14 +50,9 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
 
     private val beveragesAdapter by lazy {
         AsyncListDiffDelegationAdapter(
-            beveragesAdapterDelegate { beveragesId -> onBeveragesClicked(beveragesId) },
+            beveragesAdapterDelegate { beveragesId -> viewModel.onBeveragesClicked(beveragesId) },
             addNewFooterAdapterDelegate { openCreateBeveragesDialog() }
         )
-    }
-
-    private fun onBeveragesClicked(beveragesId: Int) {
-        viewModel.onBeveragesClicked(beveragesId)
-        openCreateBeveragesDialog()
     }
 
     @SuppressLint("RestrictedApi")
@@ -93,6 +92,14 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        parseArgs()
+    }
+
+    private fun parseArgs() {
+        if (arguments == null) return
+
+        val intervalId = requireArguments().getInt(ARG_INTERVAL_ID)
+        viewModel.intervalId = intervalId
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -106,6 +113,7 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
         tvBack.setOnClickListener { dismiss() }
         tvSave.setOnClickListener { saveAndDismiss() }
         rvCups.apply {
+            itemAnimator = null
             layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
             adapter = beveragesAdapter
         }
@@ -118,6 +126,7 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun saveAndDismiss() {
+        viewModel.addCupsToInterval()
         dismiss()
     }
 

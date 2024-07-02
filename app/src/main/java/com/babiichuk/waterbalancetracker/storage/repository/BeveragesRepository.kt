@@ -18,11 +18,11 @@ class BeveragesRepository @Inject constructor(private val beveragesDao: Beverage
     }
 
     fun getBeveragesFlow(): Flow<List<BeveragesEntity>> {
-        return beveragesDao.getAllBeveragesByUserIdFlow()
+        return beveragesDao.getAllBeveragesFlow()
     }
 
     suspend fun getBeverages(): List<BeveragesEntity> {
-        return beveragesDao.getAllBeveragesByUserId()
+        return beveragesDao.getAllBeverages()
     }
 
     suspend fun deleteBeverage(id: Int) {

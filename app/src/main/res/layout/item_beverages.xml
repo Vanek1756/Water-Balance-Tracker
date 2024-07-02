@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/blue"
+        app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="6dp"
         app:contentPadding="10dp">
 
@@ -23,8 +23,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 app:srcCompat="@drawable/ic_cup" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -33,7 +33,7 @@
                 android:ellipsize="end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 tools:text="Water" />
 
@@ -41,7 +41,7 @@
                 android:id="@+id/tvVolume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="10sp"
                 tools:text="200 ml" />
 
