@@ -31,8 +31,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val cupsAdapter by lazy {
         AsyncListDiffDelegationAdapter(
-            cupsContainerAdapterDelegate (
-               onAddButtonClicked =  { onAddCupClicked(it) },
+            cupsContainerAdapterDelegate(
+                onAddButtonClicked = { onAddCupClicked(it) },
                 onCupClicked = { onCupClicked(it) }
             )
         )
@@ -76,8 +76,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun bindWaterRate(user: UserEntity) {
-        val recommendedRate =  user.recommendedWaterRate
-        val currentRate =  user.currentWaterRate
+        val recommendedRate = user.recommendedWaterRate
+        val currentRate = user.currentWaterRate
         binding.apply {
             tvRecommendedAmount.text = getString(R.string.home_from_rate, recommendedRate)
             tvCurrentAmount.text = getString(R.string.home_current_rate, currentRate)

@@ -12,7 +12,7 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.core.os.bundleOf
 import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.babiichuk.waterbalancetracker.app.ui.adapterdelegates.addNewFooterAdapterDelegate
@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
 
     private val binding by viewBinding(FragmentBottomSheetNewCupBinding::bind)
-    private val viewModel by activityViewModels<NewCupViewModel>()
+    private val viewModel: NewCupViewModel by viewModels()
 
     companion object {
         const val TAG: String = "NewCupBottomSheetFragment"

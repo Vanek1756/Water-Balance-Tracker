@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.binding.bind
@@ -28,7 +28,7 @@ class CreateCupDialogFragment : DialogFragment(R.layout.dialog_fragment_create_c
     }
 
     private val binding by viewBinding(DialogFragmentCreateCupBinding::bind)
-    private val viewModel by activityViewModels<NewCupViewModel>()
+    private val viewModel: NewCupViewModel by viewModels()
 
     var onDismissCallback: (() -> Unit)? = null
 

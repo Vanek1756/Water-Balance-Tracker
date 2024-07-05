@@ -49,7 +49,6 @@ class MainActivityViewModel @Inject constructor(
 
     private fun collectVolume(user: UserEntity?) {
         if (user == null) {
-            waterRatePreferencesDao.clear()
             return
         }
         val todayDay = getTodayDate()

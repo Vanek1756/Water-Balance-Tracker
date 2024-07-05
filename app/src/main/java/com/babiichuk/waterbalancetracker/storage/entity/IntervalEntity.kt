@@ -49,7 +49,7 @@ enum class DefaultTimeIntervalType(
     val intervalFrom: String,
     val intervalTo: String
 ) {
-    BEFORE_BREAKFAST(R.string.interval_breakfast, "7:30", "8:30"),
-    BEFORE_LUNCH(R.string.interval_lunch, "10:40", "13:40"),
-    BEFORE_DINNER(R.string.interval_dinner, "15:00", "18:00"),
+    BEFORE_BREAKFAST(R.string.interval_breakfast, "7:00", "9:40"),
+    BEFORE_LUNCH(R.string.interval_lunch, "10:00", "14:00"),
+    BEFORE_DINNER(R.string.interval_dinner, "14:20", "18:40"),
 }
