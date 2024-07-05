@@ -13,7 +13,8 @@ import com.babiichuk.waterbalancetracker.databinding.ItemIntervalContainerBindin
 import com.babiichuk.waterbalancetracker.storage.entity.CupEntity
 
 fun cupsContainerAdapterDelegate(
-    onAddButtonClicked: (containerId: Int) -> Unit
+    onAddButtonClicked: (containerId: Int) -> Unit,
+    onCupClicked: (cupId: Int) -> Unit
 ) = diffAdapterDelegateLayoutContainer<StateHolder<IntervalContainer>, Any>(
     layout = R.layout.item_interval_container,
     on = { item, _, _ -> item is StateHolder<*> && item.value is IntervalContainer },
@@ -29,7 +30,7 @@ fun cupsContainerAdapterDelegate(
     val childLayoutManager =  GridLayoutManager(context, 5, GridLayoutManager.VERTICAL, false)
 
     val adapter = AsyncListDiffDelegationAdapter(
-        cupsAdapterDelegate(),
+        cupsAdapterDelegate(onCupClicked),
         addCupAdapterDelegate {onAddButtonClicked.invoke(item.value.id)}
     )
 
@@ -53,7 +54,9 @@ fun cupsContainerAdapterDelegate(
     }
 }
 
-fun cupsAdapterDelegate() = diffAdapterDelegateLayoutContainer<StateHolder<CupEntity>, Any>(
+fun cupsAdapterDelegate(
+    onCupClicked: (cupId: Int) -> Unit
+) = diffAdapterDelegateLayoutContainer<StateHolder<CupEntity>, Any>(
     layout = R.layout.item_cups,
     on = { item, _, _ -> item is StateHolder<*> && item.value is CupEntity },
     same = { oldItem, newItem -> oldItem.value.id == newItem.value.id },
@@ -66,12 +69,13 @@ fun cupsAdapterDelegate() = diffAdapterDelegateLayoutContainer<StateHolder<CupEn
 ) {
 
     val binding = ItemCupsBinding.bind(itemView).apply {
+        root.setOnClickListener { onCupClicked.invoke(item.value.id) }
     }
 
     bind {
         binding.apply {
             ivIconCup.setImageResource(item.value.iconId)
-            tvVolume.text = getString(R.string.home_current_rate, item.value.volume.toDouble())
+            tvVolume.text = getString(R.string.home_current_rate, item.value.volume)
         }
     }
 }

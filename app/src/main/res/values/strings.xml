@@ -32,13 +32,13 @@
     <string name="text_back">Back</string>
     <string name="text_apply">Apply</string>
     <string name="text_log_out">Log out</string>
-    <string name="text_volume_ml">%1$s ml</string>
+    <string name="text_volume_ml">%1$d ml</string>
 
 
     <!--    Home screen    -->
     <string name="home_today">Today</string>
-    <string name="home_from_rate">From %1$s ml</string>
-    <string name="home_current_rate">%1$s ml</string>
+    <string name="home_from_rate">From %1$d ml</string>
+    <string name="home_current_rate">%1$d ml</string>
     <string name="text_save">Save</string>
     <string name="text_add">Add</string>
     <string name="text_beverages">Beverages</string>
@@ -61,6 +61,10 @@
     <string name="interval_breakfast">Before breakfast %1$s from to %2$s</string>
     <string name="interval_lunch">Before lunch %1$s from to %2$s</string>
     <string name="interval_dinner">Before dinner %1$s from to %2$s</string>
+    <string name="text_daily_dose_water_drunk">Your daily dose of water has been drunk!</string>
+    <string name="text_continue">Continue</string>
+    <string name="text_delete">Delete</string>
+    <string name="text_cancel">Cancel</string>
 
 
 </resources>

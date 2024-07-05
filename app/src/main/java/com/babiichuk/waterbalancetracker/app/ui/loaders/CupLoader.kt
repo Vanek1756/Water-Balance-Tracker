@@ -29,6 +29,9 @@ class CupLoader @Inject constructor(
         MutableStateFlow(emptyList())
     val cupsStateFLow = _cupsMutableStateFLow.asStateFlow()
 
+    private val _currentVolumeMutableFlow:MutableStateFlow<Int> = MutableStateFlow(0)
+    val currentVolumeFlow = _currentVolumeMutableFlow.asStateFlow()
+
     private val scopeIo = CoroutineScope(Dispatchers.IO)
 
     fun subscribeData() {
@@ -49,12 +52,17 @@ class CupLoader @Inject constructor(
             return@map StateHolder(intervalContainer)
         }
         _cupsMutableStateFLow.update { listOfContainers }
+        _currentVolumeMutableFlow.update { listOfCups.sumOf { it.volume } }
         userLoader.updateVolume(listOfCups.sumOf { it.volume })
     }
 
     fun insertCups(listOfBeverages: List<BeveragesEntity>, intervalId: Int) {
         val listOfCups = listOfBeverages.map { CupEntity.create(it, intervalId) }
         scopeIo.launch { cupRepository.insertCups(listOfCups) }
+    }
+
+    fun deleteCup(cupId: Int) {
+        scopeIo.launch { cupRepository.deleteCup(cupId) }
     }
 
 }

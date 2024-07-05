@@ -17,6 +17,7 @@ ksp = "2.0.0-1.0.22"
 roomVersion = "2.6.1"
 jodaTime = "2.12.7"
 adapterDelegates = "4.3.0"
+kotpref = "2.13.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,20 +30,22 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationComponent"}
-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationComponent"}
-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt"}
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationComponent" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationComponent" }
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 joda-time = { group = "joda-time", name = "joda-time", version.ref = "jodaTime" }
 adapterDelgates = { group = "com.hannesdorfmann", name = "adapterdelegates4-kotlin-dsl-layoutcontainer", version.ref = "adapterDelegates" }
+kotpref = { group = "com.chibatching.kotpref", name = "kotpref", version.ref = "kotpref" }
+kotpref-initializer = { group = "com.chibatching.kotpref", name = "initializer", version.ref = "kotpref" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
-navigation-safeargs = {id = "androidx.navigation.safeargs", version.ref = "navigationComponent"}
-ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
+navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigationComponent" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 

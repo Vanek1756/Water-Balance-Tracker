@@ -4,6 +4,7 @@ import android.content.Context
 import com.babiichuk.waterbalancetracker.storage.dao.BeveragesDao
 import com.babiichuk.waterbalancetracker.storage.dao.IntervalDao
 import com.babiichuk.waterbalancetracker.storage.dao.UserDao
+import com.babiichuk.waterbalancetracker.storage.dao.WaterRatePreferencesDao
 import com.babiichuk.waterbalancetracker.storage.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -34,6 +35,11 @@ class DataModule {
     @Provides
     fun provideIntervalDao(database: AppDatabase): IntervalDao {
         return database.intervalDao()
+    }
+
+    @Provides
+    fun providePreferencesWaterDao(database: AppDatabase): WaterRatePreferencesDao {
+        return database.getWaterDao()
     }
 
 }

@@ -7,15 +7,16 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.babiichuk.waterbalancetracker.app.ui.pages.home.HomeFragment"
-        android:label="HomeFragment" >
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_nav_login"-->
-<!--            app:destination="@id/nav_login" />-->
-    </fragment>
+        android:label="HomeFragment" />
 
-<!--    <include app:graph="@navigation/nav_poll" />-->
+    <fragment
+        android:id="@+id/rateDrankFragment"
+        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.rate.RateDrankFragment"
+        android:label="RateDrankFragment" />
 
-    <!--    <include app:graph="@navigation/nav_login" />-->
+    <action
+        android:id="@+id/action_global_rateDrunk"
+        app:destination="@id/rateDrankFragment"/>
 
 
 </navigation>

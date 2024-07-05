@@ -33,32 +33,34 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcvMain) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fcvMain) as NavHostFragment
         navController = navHostFragment.navController
 
         binding.setupBinding()
         viewModel.subscribe()
-        viewModel.subscribeData()
     }
 
     private fun startHomeFragments() {
         navController.navigate(R.id.nav_main)
     }
 
-    private fun ActivityMainBinding.setupBinding(){
+    private fun ActivityMainBinding.setupBinding() {
 
     }
 
-    private fun MainActivityViewModel.subscribe(){
+    private fun MainActivityViewModel.subscribe() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    userIsExistFlow.collect {
-                        if (it) startHomeFragments()
-                    }
-                }
+                launch { userIsExistFlow.collect { if (it) startHomeFragments() } }
+                launch { showWaterRateScreenFlow.collect { openRateDrunkFragment(it) } }
             }
         }
+    }
+
+    private fun openRateDrunkFragment(value: Boolean) {
+        if (!value) return
+        navController.navigate(R.id.action_global_rateDrunk)
     }
 
 }

@@ -82,4 +82,8 @@ dependencies {
     // Adapter Delegates
     implementation(libs.adapterDelgates)
 
+    // Kotpref
+    implementation(libs.kotpref)
+    implementation(libs.kotpref.initializer)
+
 }

@@ -11,6 +11,7 @@ import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseFragment
 import com.babiichuk.waterbalancetracker.app.ui.pages.cup.NewCupBottomSheetFragment
+import com.babiichuk.waterbalancetracker.app.ui.pages.deletecup.DeleteCupBottomSheetFragment
 import com.babiichuk.waterbalancetracker.app.ui.utils.adapterdelegates.AsyncListDiffDelegationAdapter
 import com.babiichuk.waterbalancetracker.databinding.FragmentHomeBinding
 import com.babiichuk.waterbalancetracker.storage.entity.UserEntity
@@ -30,8 +31,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val cupsAdapter by lazy {
         AsyncListDiffDelegationAdapter(
-            cupsContainerAdapterDelegate { onAddCupClicked(it) }
+            cupsContainerAdapterDelegate (
+               onAddButtonClicked =  { onAddCupClicked(it) },
+                onCupClicked = { onCupClicked(it) }
+            )
         )
+    }
+
+    private fun onCupClicked(cupId: Int) {
+        val fragment = DeleteCupBottomSheetFragment.newInstance(cupId)
+        fragment.show(parentFragmentManager, DeleteCupBottomSheetFragment.TAG)
     }
 
     private fun onAddCupClicked(id: Int) {
@@ -62,11 +71,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private fun HomeViewModel.subscribe() {
         launchOnLifecycle(Lifecycle.State.STARTED) {
             launch { userFLow.collect { it?.let { bindWaterRate(it) } } }
-            launch {
-                cupsStateFLow.collectLatest {
-                    cupsAdapter.items = it
-                }
-            }
+            launch { cupsStateFLow.collectLatest { cupsAdapter.items = it } }
         }
     }
 
