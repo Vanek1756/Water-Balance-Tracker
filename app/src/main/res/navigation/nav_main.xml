@@ -17,6 +17,10 @@
     <action
         android:id="@+id/action_global_rateDrunk"
         app:destination="@id/rateDrankFragment"/>
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.stats.StatsFragment"
+        android:label="StatsFragment" />
 
 
 </navigation>

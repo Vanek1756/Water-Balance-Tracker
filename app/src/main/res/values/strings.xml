@@ -11,6 +11,8 @@
     <string name="login_later">Later</string>
 
     <!--    Poll screens    -->
+    <string name="poll_intro_app_name">Water Balance</string>
+    <string name="poll_intro_get_started">Get Started</string>
     <string name="poll_step1">Step 1</string>
     <string name="poll_step2">Step 2</string>
     <string name="poll_different_amounts_of_water_per_day">Men and women have different amounts of water per day</string>
@@ -23,17 +25,10 @@
     <string name="poll_enter_your_weight">Enter your weight to make it easier to determine your daily water intake</string>
     <string name="poll_older_person_gets_more_water">The older a person gets, the more water he needs to drink</string>
     <string name="poll_what_is_your_weight">What is your weight?</string>
-    <string name="poll_great_water_intake_calculated">Great! We have calculated your daily water intake requirement. If your doctor has advised a different amount, please follow your doctor\'s recommendations.</string>
+    <string name="poll_great_water_intake_calculated">We have calculated your daily water intake requirement. If your doctor has advised a different amount, please follow your doctor\'s recommendations.</string>
     <string name="poll_your_rate_of_water_per_day">Your rate of water consumption per day:</string>
     <string name="poll_edit">Edit</string>
-
-    <!--    Another text    -->
-    <string name="text_next">Next</string>
-    <string name="text_back">Back</string>
-    <string name="text_apply">Apply</string>
-    <string name="text_log_out">Log out</string>
-    <string name="text_volume_ml">%1$d ml</string>
-
+    <string name="poll_great">Great!</string>
 
     <!--    Home screen    -->
     <string name="home_today">Today</string>
@@ -51,7 +46,6 @@
     <string name="beverages_wine">Wine</string>
     <string name="beverages_pepsi">Pepsi</string>
 
-
     <!--    Create cup screen    -->
     <string name="createCup_enterNameOfBeverages">Enter the name of the beverages</string>
     <string name="createCup_enterVolumeOfDrink">Enter the volume of the drink</string>
@@ -61,10 +55,23 @@
     <string name="interval_breakfast">Before breakfast %1$s from to %2$s</string>
     <string name="interval_lunch">Before lunch %1$s from to %2$s</string>
     <string name="interval_dinner">Before dinner %1$s from to %2$s</string>
+
+    <!--    Stats screen    -->
+    <string name="stats_statistics">Statistics</string>
+    <string name="stats_day">Day</string>
+    <string name="stats_week">Week</string>
+    <string name="stats_month">Month</string>
+    <string name="stats_year">Year</string>
+
+    <!--    Another text    -->
+    <string name="text_next">Next</string>
+    <string name="text_back">Back</string>
+    <string name="text_apply">Apply</string>
+    <string name="text_log_out">Log out</string>
+    <string name="text_volume_ml">%1$d ml</string>
     <string name="text_daily_dose_water_drunk">Your daily dose of water has been drunk!</string>
     <string name="text_continue">Continue</string>
     <string name="text_delete">Delete</string>
     <string name="text_cancel">Cancel</string>
-
 
 </resources>

@@ -66,7 +66,7 @@ class MainActivityViewModel @Inject constructor(
         }
 
         val isShowedScreen = waterRatePreferencesDao.setShowedScreen()
-        val isRateComplete = user.currentWaterRate >= user.recommendedWaterRate
+        val isRateComplete = user.currentWaterRate >= user.recommendedWaterRate && user.currentWaterRate != 0
 
         if (isRateComplete && !isShowedScreen) {
             viewModelScope.launch {

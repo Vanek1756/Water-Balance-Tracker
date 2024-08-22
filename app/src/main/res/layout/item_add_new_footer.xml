@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/gray"
+        app:cardBackgroundColor="@color/colorGrayVariant1"
         app:cardCornerRadius="6dp"
         app:contentPadding="10dp">
 

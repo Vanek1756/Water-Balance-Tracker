@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_intro_gradient">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginTop="116dp"
+        android:text="@string/poll_intro_app_name"
+        android:textColor="@color/colorWhite"
+        android:textSize="36sp"
+        app:fontFamily="@font/ledger_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Drink water regularly, and your body will reward you with energy and mental clarity"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:fontFamily="@font/koh_santepheap_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIntro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnContinue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginBottom="92dp"
+        android:background="@drawable/background_button_blue_light_v2"
+        android:text="@string/poll_intro_get_started"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:fontFamily="@font/jet_brains_mono_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

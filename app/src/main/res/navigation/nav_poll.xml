@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_poll"
-    app:startDestination="@id/genderFragment">
+    app:startDestination="@id/introFragment">
 
     <fragment
         android:id="@+id/genderFragment"
@@ -26,4 +26,12 @@
         android:id="@+id/calculationFragment"
         android:name="com.babiichuk.waterbalancetracker.app.ui.pages.poll.calculation.CalculationFragment"
         android:label="CalculationFragment" />
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.babiichuk.waterbalancetracker.app.ui.pages.poll.IntroFragment"
+        android:label="IntroFragment" >
+        <action
+            android:id="@+id/action_introFragment_to_genderFragment"
+            app:destination="@id/genderFragment" />
+    </fragment>
 </navigation>

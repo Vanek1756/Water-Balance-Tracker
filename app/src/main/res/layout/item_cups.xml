@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/colorWhite"
         app:cardCornerRadius="8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -30,7 +30,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:textSize="14sp"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhite"
         tools:text="200 ml" />
 
 </LinearLayout>

@@ -1,9 +1,30 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="AppTheme" parent="Theme.WaterBalanceTracker" />
+
     <!-- Base application theme. -->
     <style name="Base.Theme.WaterBalanceTracker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<!--         <item name="colorPrimary">@color/colorBlueVariant1</item>-->
     </style>
 
-    <style name="Theme.WaterBalanceTracker" parent="Base.Theme.WaterBalanceTracker" />
+    <style name="Theme.WaterBalanceTracker" parent="Base.Theme.WaterBalanceTracker">
+
+        <item name="radioButtonStyle">@style/Widget.WaterBalanceTracker.RadioButton</item>
+        <item name="android:textViewStyle">@style/Widget.WaterBalanceTracker.TextView</item>
+    </style>
+
+    <style name="Widget.WaterBalanceTracker.RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:button">@drawable/selector_check_box</item>
+        <item name="buttonCompat">@drawable/selector_check_box</item>
+        <item name="fontFamily">@font/koh_santepheap_regular</item>
+    </style>
+
+    <style name="Widget.WaterBalanceTracker.TextView" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/koh_santepheap_regular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 </resources>

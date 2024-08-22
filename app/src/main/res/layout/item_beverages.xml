@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/gray"
+        app:cardBackgroundColor="@color/colorGrayVariant1"
         app:cardCornerRadius="6dp"
         app:contentPadding="10dp">
 
@@ -33,7 +33,7 @@
                 android:ellipsize="end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/colorWhite"
                 android:textSize="14sp"
                 tools:text="Water" />
 
@@ -41,7 +41,7 @@
                 android:id="@+id/tvVolume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/colorWhite"
                 android:textSize="10sp"
                 tools:text="200 ml" />
 

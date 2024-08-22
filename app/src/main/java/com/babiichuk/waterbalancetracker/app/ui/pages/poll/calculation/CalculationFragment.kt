@@ -8,6 +8,7 @@ import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.binding.bind
 import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
+import com.babiichuk.waterbalancetracker.app.ui.extensions.requestFocusAndShowKeyboard
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseFragment
 import com.babiichuk.waterbalancetracker.databinding.FragmentCalculationBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,8 +33,8 @@ class CalculationFragment : BaseFragment(R.layout.fragment_calculation) {
     }
 
     private fun FragmentCalculationBinding.setupBinding(){
-        tvBack.setOnClickListener { navigateUp() }
-        tvEdit.setOnClickListener { inputRate.requestFocus() }
+        btnBack.setOnClickListener { navigateUp() }
+        tvEdit.setOnClickListener { inputRate.requestFocusAndShowKeyboard() }
         btnNext.setOnClickListener { onNextClicked() }
     }
 

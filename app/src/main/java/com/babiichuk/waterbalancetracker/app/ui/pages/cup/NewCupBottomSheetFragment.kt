@@ -132,7 +132,6 @@ class NewCupBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun openCreateBeveragesDialog() {
         val fragment = CreateCupDialogFragment.newInstance()
-        fragment.onDismissCallback = { viewModel.addNewBeverages() }
         fragment.show(parentFragmentManager, CreateCupDialogFragment.TAG)
     }
 

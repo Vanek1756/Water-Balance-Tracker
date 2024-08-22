@@ -10,7 +10,7 @@
         android:id="@+id/tvIntervalTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhite"
         android:textSize="16sp"
         tools:text="@string/interval_breakfast" />
 
@@ -18,5 +18,6 @@
         android:id="@+id/rvCups"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        tools:listitem="@layout/item_cups" />
 </LinearLayout>

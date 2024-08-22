@@ -34,7 +34,7 @@ class AgeAndWeightFragment : BaseFragment(R.layout.fragment_age_and_weight) {
     }
 
     private fun FragmentAgeAndWeightBinding.setupBinding(){
-        tvBack.setOnClickListener { navigateUp() }
+        btnBack.setOnClickListener { navigateUp() }
         btnNext.setOnClickListener { onNextClicked() }
     }
 

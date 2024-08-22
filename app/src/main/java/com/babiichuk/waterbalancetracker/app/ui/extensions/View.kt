@@ -122,3 +122,9 @@ inline fun View.showOrInvisibleIf(predicate: () -> Boolean): View {
     }
     return this
 }
+
+fun View.requestFocusAndShowKeyboard() {
+    requestFocus()
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+    imm?.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}

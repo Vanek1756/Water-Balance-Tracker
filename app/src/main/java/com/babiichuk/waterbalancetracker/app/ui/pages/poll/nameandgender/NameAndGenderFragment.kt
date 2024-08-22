@@ -33,13 +33,13 @@ class NameAndGenderFragment : BaseFragment(R.layout.fragment_name_and_gender) {
     }
 
     private fun FragmentNameAndGenderBinding.setupBinding(){
-        rbMan.setOnClickListener { btnNext.isEnabled = true }
-        rbWoman.setOnClickListener { btnNext.isEnabled = true }
+        cbMan.setOnClickListener { btnNext.isEnabled = true }
+        cbWoman.setOnClickListener { btnNext.isEnabled = true }
         btnNext.setOnClickListener { onNextClicked() }
     }
 
     private fun onNextClicked() {
-        val gender = if (binding.rbMan.isChecked) GenderType.MAN else GenderType.WOMAN
+        val gender = if (binding.cbMan.isChecked) GenderType.MAN else GenderType.WOMAN
         viewModel.onNextClicked(gender)
 
         openAgeAndWeightFragment()

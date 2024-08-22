@@ -30,7 +30,7 @@ fun beveragesAdapterDelegate(
     bind {
         binding.apply {
             val isSelected = item.getStateOrFalse(State.SELECTED)
-            val colorCardId = if (isSelected) R.color.blue else R.color.gray
+            val colorCardId = if (isSelected) R.color.colorBlueVariant1 else R.color.colorGrayVariant1
             cardView.setCardBackgroundColor(getColor(colorCardId))
 
             val name = item.value.nameString.ifEmpty { getString(item.value.nameResId) }

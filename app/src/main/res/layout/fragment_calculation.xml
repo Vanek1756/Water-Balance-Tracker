@@ -3,81 +3,137 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBlueVariant4">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivTopWave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_poll_top_wave" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBottomWave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_poll_bottom_wave" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvBack"
+        android:id="@+id/tvGreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:drawableStart="@drawable/ic_arrow_back"
-        android:drawableTint="@color/white"
-        android:text="@string/text_back"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/poll_great"
+        android:textColor="@color/colorWhite"
+        android:textSize="36sp"
+        app:fontFamily="@font/ledger_regular"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ivTopWave" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginTop="24dp"
+        android:gravity="start"
+        android:justificationMode="inter_word"
         android:text="@string/poll_great_water_intake_calculated"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhite"
         android:textSize="18sp"
+        app:fontFamily="@font/koh_santepheap_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBack" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGreate" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="24dp"
         android:text="@string/poll_your_rate_of_water_per_day"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp"
+        app:fontFamily="@font/koh_santepheap_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/inputRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textColor="@color/white"
-        android:textSize="24sp"
+        android:layout_marginTop="34dp"
+        android:backgroundTint="@color/colorWhite"
+        android:paddingHorizontal="15dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="36sp"
+        android:singleLine="true"
+        android:inputType="number"
+        android:maxLines="1"
+        app:fontFamily="@font/koh_santepheap_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle2"
-        tools:text="2400" />
+        tools:text="2400 slakdfjalksdjfaklsdjfaskdlfjaskldfjskljaf" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="10dp"
         android:text="@string/poll_edit"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhite"
         android:textSize="14sp"
+        app:fontFamily="@font/koh_santepheap_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputRate" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBack"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/background_selector_button"
+        android:fontFamily="@font/jet_brains_mono_regular"
+        android:gravity="center_vertical|end"
+        android:paddingHorizontal="18dp"
+        android:text="@string/text_back"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEdit" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/text_apply"
-        android:textColor="@color/white"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/background_selector_button"
+        android:fontFamily="@font/jet_brains_mono_regular"
+        android:gravity="center_vertical|start"
+        android:paddingHorizontal="18dp"
+        android:text="@string/text_next"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
         app:layout_constraintTop_toBottomOf="@+id/tvEdit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

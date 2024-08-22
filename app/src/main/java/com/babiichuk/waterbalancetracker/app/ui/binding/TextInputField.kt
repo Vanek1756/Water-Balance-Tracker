@@ -1,15 +1,15 @@
 package com.babiichuk.waterbalancetracker.app.ui.binding
 
 import android.text.Spanned
+import android.widget.EditText
 import com.babiichuk.waterbalancetracker.app.ui.utils.SimpleTextWatcher
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 
 @JvmName("bindTextInputField-String")
-suspend fun MutableStateFlow<String?>.bind(filed: TextInputEditText) {
+suspend fun MutableStateFlow<String?>.bind(filed: EditText) {
     val watcher = SimpleTextWatcher(afterTextChanged = {
         val newValue =  getTextString(filed)
         if (newValue != value) {
@@ -23,7 +23,7 @@ suspend fun MutableStateFlow<String?>.bind(filed: TextInputEditText) {
 }
 
 @JvmName("bindTextInputField-Double")
-suspend fun MutableStateFlow<Int>.bind(filed: TextInputEditText) {
+suspend fun MutableStateFlow<Int>.bind(filed: EditText) {
     val watcher = SimpleTextWatcher(afterTextChanged = {
         try {
             val newValue =  getTextString(filed).toString().toInt()
@@ -41,7 +41,7 @@ suspend fun MutableStateFlow<Int>.bind(filed: TextInputEditText) {
 }
 
 
-private fun setText(view: TextInputEditText, text: CharSequence?) {
+private fun setText(view: EditText, text: CharSequence?) {
     val oldText = view.text
     if (text === oldText || text == null && oldText?.length == 0) {
         return
@@ -56,7 +56,7 @@ private fun setText(view: TextInputEditText, text: CharSequence?) {
     view.setText(text)// Little bit changed from original
 }
 
-private fun getTextString(view: TextInputEditText): CharSequence? {
+private fun getTextString(view: EditText): CharSequence? {
     return view.text
 }
 

@@ -11,12 +11,12 @@ import androidx.lifecycle.Lifecycle
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.binding.bind
 import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
-import com.babiichuk.waterbalancetracker.app.ui.extensions.hideOrShowIf
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
-import com.babiichuk.waterbalancetracker.app.ui.pages.cup.NewCupViewModel
 import com.babiichuk.waterbalancetracker.databinding.DialogFragmentCreateCupBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class CreateCupDialogFragment : DialogFragment(R.layout.dialog_fragment_create_cup) {
 
     companion object {
@@ -28,7 +28,7 @@ class CreateCupDialogFragment : DialogFragment(R.layout.dialog_fragment_create_c
     }
 
     private val binding by viewBinding(DialogFragmentCreateCupBinding::bind)
-    private val viewModel: NewCupViewModel by viewModels()
+    private val viewModel: CreateCupViewModel by viewModels()
 
     var onDismissCallback: (() -> Unit)? = null
 
@@ -59,26 +59,17 @@ class CreateCupDialogFragment : DialogFragment(R.layout.dialog_fragment_create_c
             viewModel.newCupVolume.value = null
             dismiss()
         }
-        btnSave.setOnClickListener { dismiss() }
-        btnDelete.setOnClickListener { onDeleteClicked() }
-    }
-
-    private fun onDeleteClicked() {
-            viewModel.deleteBeverages()
+        btnSave.setOnClickListener {
+            viewModel.addNewBeverages()
             dismiss()
+        }
     }
 
-    private fun NewCupViewModel.subscribe() {
+    private fun CreateCupViewModel.subscribe() {
         launchOnLifecycle(Lifecycle.State.STARTED) {
             launch { newCupName.bind(binding.inputName) }
             launch { newCupVolume.bind(binding.inputVolume) }
         }
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        binding.btnDelete.hideOrShowIf { viewModel.newCupName.value.isNullOrEmpty() }
     }
 
     override fun onDismiss(dialog: DialogInterface) {
