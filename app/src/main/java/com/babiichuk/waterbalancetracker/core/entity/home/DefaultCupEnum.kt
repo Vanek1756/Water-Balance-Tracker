@@ -1,4 +1,4 @@
-package com.babiichuk.waterbalancetracker.core.entity
+package com.babiichuk.waterbalancetracker.core.entity.home
 
 enum class DefaultCupEnum(val id: String) {
     WATER("WATER"),

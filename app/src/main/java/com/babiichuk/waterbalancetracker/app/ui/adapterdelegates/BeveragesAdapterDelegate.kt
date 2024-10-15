@@ -2,7 +2,7 @@ package com.babiichuk.waterbalancetracker.app.ui.adapterdelegates
 
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.utils.adapterdelegates.diffAdapterDelegateLayoutContainer
-import com.babiichuk.waterbalancetracker.core.entity.AddNewFooter
+import com.babiichuk.waterbalancetracker.core.entity.home.AddNewFooter
 import com.babiichuk.waterbalancetracker.core.utils.State
 import com.babiichuk.waterbalancetracker.core.utils.StateHolder
 import com.babiichuk.waterbalancetracker.core.utils.getStateOrFalse

@@ -5,7 +5,7 @@ import com.babiichuk.waterbalancetracker.app.ui.loaders.BeveragesLoader
 import com.babiichuk.waterbalancetracker.app.ui.loaders.CupLoader
 import com.babiichuk.waterbalancetracker.app.ui.loaders.UserLoader
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseViewModel
-import com.babiichuk.waterbalancetracker.core.entity.AddNewFooter
+import com.babiichuk.waterbalancetracker.core.entity.home.AddNewFooter
 import com.babiichuk.waterbalancetracker.core.utils.State
 import com.babiichuk.waterbalancetracker.core.utils.StateHolder
 import com.babiichuk.waterbalancetracker.core.utils.getStateOrFalse

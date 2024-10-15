@@ -1,7 +1,7 @@
 package com.babiichuk.waterbalancetracker.app.ui.extensions
 
 import com.babiichuk.waterbalancetracker.R
-import com.babiichuk.waterbalancetracker.core.entity.DefaultCupEnum
+import com.babiichuk.waterbalancetracker.core.entity.home.DefaultCupEnum
 
 fun String.getDefaultCupById() = DefaultCupEnum.entries.firstOrNull { it.id == this }
 

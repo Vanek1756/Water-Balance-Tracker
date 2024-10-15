@@ -1,12 +1,11 @@
 package com.babiichuk.waterbalancetracker.app.ui.pages.home
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.babiichuk.waterbalancetracker.app.ui.loaders.HomeLoader
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseViewModel
-import com.babiichuk.waterbalancetracker.core.entity.DefaultAmount
-import com.babiichuk.waterbalancetracker.core.entity.DefaultCup
-import com.babiichuk.waterbalancetracker.core.entity.HomeContainer
+import com.babiichuk.waterbalancetracker.core.entity.home.DefaultAmount
+import com.babiichuk.waterbalancetracker.core.entity.home.DefaultCup
+import com.babiichuk.waterbalancetracker.core.entity.home.HomeContainer
 import com.babiichuk.waterbalancetracker.core.utils.State
 import com.babiichuk.waterbalancetracker.core.utils.StateHolder
 import com.babiichuk.waterbalancetracker.core.utils.childStateChange
@@ -39,9 +38,6 @@ class HomeViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             combine(homeLoader.homeCupsFLow, homeLoader.homeAmountFLow) { cups, amounts ->
-                Log.e("HOME_VIEW_MODEL", "combine(homeLoader.homeCupsFLow, homeLoader.homeAmountFLow)", )
-                Log.e("HOME_VIEW_MODEL", "homeCupsFLow: $cups", )
-                Log.e("HOME_VIEW_MODEL", "homeAmountFLow: $amounts", )
                 collectCupsAndAmount(cups, amounts)
             }.collect()
         }

@@ -1,6 +1,7 @@
 package com.babiichuk.waterbalancetracker.app.ui.view.bottomnavview
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.animation.LinearInterpolator
@@ -53,6 +54,7 @@ class CustomBottomNavigationView @JvmOverloads constructor(
             onItemClickListener?.invoke(binding.statsFragment.id)
             selectedItemId = binding.statsFragment.id
         }
+        binding.bottomBar.setBackgroundColor(Color.TRANSPARENT)
     }
 
 

@@ -1,4 +1,4 @@
-package com.babiichuk.waterbalancetracker.core.entity
+package com.babiichuk.waterbalancetracker.core.entity.home
 
 import com.babiichuk.waterbalancetracker.core.utils.StateHolder
 

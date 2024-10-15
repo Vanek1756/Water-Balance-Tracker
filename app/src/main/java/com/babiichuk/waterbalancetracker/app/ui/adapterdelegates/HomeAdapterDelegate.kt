@@ -7,9 +7,9 @@ import com.babiichuk.waterbalancetracker.app.ui.extensions.getDefaultCupIconById
 import com.babiichuk.waterbalancetracker.app.ui.extensions.getDefaultCupNameById
 import com.babiichuk.waterbalancetracker.app.ui.utils.adapterdelegates.AsyncListDiffDelegationAdapter
 import com.babiichuk.waterbalancetracker.app.ui.utils.adapterdelegates.diffAdapterDelegateLayoutContainer
-import com.babiichuk.waterbalancetracker.core.entity.DefaultAmount
-import com.babiichuk.waterbalancetracker.core.entity.DefaultCup
-import com.babiichuk.waterbalancetracker.core.entity.HomeContainer
+import com.babiichuk.waterbalancetracker.core.entity.home.DefaultAmount
+import com.babiichuk.waterbalancetracker.core.entity.home.DefaultCup
+import com.babiichuk.waterbalancetracker.core.entity.home.HomeContainer
 import com.babiichuk.waterbalancetracker.core.utils.State
 import com.babiichuk.waterbalancetracker.core.utils.StateHolder
 import com.babiichuk.waterbalancetracker.core.utils.getStateOrFalse
