@@ -38,7 +38,6 @@ class RegisterFragment : BaseFragment(R.layout.fragment_register) {
 
     private fun RegisterViewModel.subscribe() {
         launchOnLifecycle(Lifecycle.State.STARTED) {
-            launch { mutableIsProgressVisible.collectLatest {  binding.loadingProgress.toggleVisibility(it) } }
             launch { mutableErrorMessage.collectLatest { showError(it) } }
             launch { accountIsCreatedFlow.collectLatest { registerIsSuccess() } }
             launch { userEmail.bind(binding.inputEmail) }

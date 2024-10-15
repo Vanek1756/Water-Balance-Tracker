@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.babiichuk.waterbalancetracker.R
-import com.babiichuk.waterbalancetracker.app.ui.adapterdelegates.cupsContainerAdapterDelegate
+import com.babiichuk.waterbalancetracker.app.ui.adapterdelegates.homeContainerAdapterDelegate
 import com.babiichuk.waterbalancetracker.app.ui.binding.viewBinding
 import com.babiichuk.waterbalancetracker.app.ui.extensions.launchOnLifecycle
+import com.babiichuk.waterbalancetracker.app.ui.extensions.showOrHideIf
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseFragment
-import com.babiichuk.waterbalancetracker.app.ui.pages.cup.NewCupBottomSheetFragment
-import com.babiichuk.waterbalancetracker.app.ui.pages.deletecup.DeleteCupBottomSheetFragment
+import com.babiichuk.waterbalancetracker.app.ui.pages.amount.InputAmountDialogFragment
 import com.babiichuk.waterbalancetracker.app.ui.utils.adapterdelegates.AsyncListDiffDelegationAdapter
 import com.babiichuk.waterbalancetracker.databinding.FragmentHomeBinding
 import com.babiichuk.waterbalancetracker.storage.entity.UserEntity
@@ -32,21 +31,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val cupsAdapter by lazy {
         AsyncListDiffDelegationAdapter(
-            cupsContainerAdapterDelegate(
-                onAddButtonClicked = { onAddCupClicked(it) },
-                onCupClicked = { onCupClicked(it) }
+            homeContainerAdapterDelegate(
+                onCupClicked = { viewModel.onCupClicked(it) },
+                onAmountClicked = { viewModel.onAmountClicked(it) }
             )
         )
     }
 
-    private fun onCupClicked(cupId: Int) {
-        val fragment = DeleteCupBottomSheetFragment.newInstance(cupId)
-        fragment.show(parentFragmentManager, DeleteCupBottomSheetFragment.TAG)
-    }
-
-    private fun onAddCupClicked(id: Int) {
-        openNewCupBottomSheet(id)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,34 +47,34 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun FragmentHomeBinding.setupBinding() {
-//        btnAddCup.setOnClickListener { openNewCupBottomSheet() }
         rvCups.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = cupsAdapter
         }
-    }
-
-    private fun openNewCupBottomSheet(id: Int) {
-        val fragment = NewCupBottomSheetFragment.newInstance(id)
-        fragment.show(parentFragmentManager, NewCupBottomSheetFragment.TAG)
+        btnAdd.setOnClickListener { viewModel.onAddCupClicked() }
     }
 
     private fun HomeViewModel.subscribe() {
         launchOnLifecycle(Lifecycle.State.STARTED) {
             launch { userFLow.collect { it?.let { bindWaterRate(it) } } }
-            launch { cupsStateFLow.collectLatest { cupsAdapter.items = it } }
+            launch { homeContentFlow.collectLatest { cupsAdapter.items = it } }
+            launch { openAmountDialogFlow.collectLatest { startAmountDialog() } }
+            launch { isAddButtonVisibleFlow.collectLatest { binding.btnAdd.showOrHideIf { it } } }
         }
+    }
+
+    private fun startAmountDialog() {
+        val fragment = InputAmountDialogFragment.newInstance()
+        fragment.show(parentFragmentManager, InputAmountDialogFragment.TAG)
     }
 
     private fun bindWaterRate(user: UserEntity) {
         val recommendedRate = user.recommendedWaterRate
         val currentRate = user.currentWaterRate
         binding.apply {
-            tvRecommendedAmount.text = getString(R.string.home_from_rate, recommendedRate)
-            tvCurrentAmount.text = getString(R.string.home_current_rate, currentRate)
-            waterProgress.max = recommendedRate
-            waterProgress.setProgress(currentRate, true)
+            waterProgress.setWaterRate(recommendedRate)
+            waterProgress.setCurrentRate(currentRate)
         }
     }
 

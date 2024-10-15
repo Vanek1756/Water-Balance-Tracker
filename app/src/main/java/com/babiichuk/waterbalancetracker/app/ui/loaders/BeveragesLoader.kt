@@ -4,7 +4,6 @@ import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.core.utils.StateHolder
 import com.babiichuk.waterbalancetracker.core.utils.mapToStateHolderList
 import com.babiichuk.waterbalancetracker.storage.entity.BeveragesEntity
-import com.babiichuk.waterbalancetracker.storage.entity.DefaultBeveragesType
 import com.babiichuk.waterbalancetracker.storage.repository.BeveragesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,22 +43,22 @@ class BeveragesLoader @Inject constructor(
     }
 
     private fun createDefaultBeverages() {
-        val beveragesList = mutableListOf<BeveragesEntity>()
-        DefaultBeveragesType.entries.forEach { type ->
-            beveragesList.add(
-                BeveragesEntity.create(
-                    type.nameResId,
-                    R.drawable.ic_cup,
-                    BeveragesEntity.DEFAULT_BEVERAGES_VOLUME
-                )
-            )
-        }
-        addNewBeverages(beveragesList)
+//        val beveragesList = mutableListOf<BeveragesEntity>()
+//        DefaultBeveragesType.entries.forEach { type ->
+//            beveragesList.add(
+//                BeveragesEntity.create(
+//                    type.nameResId,
+//                    R.drawable.ic_cup_water,
+//                    BeveragesEntity.DEFAULT_BEVERAGES_VOLUME
+//                )
+//            )
+//        }
+//        addNewBeverages(beveragesList)
     }
 
     fun addNewBeverage(type: String, volume: Int, id: Int?) {
         scopeIo.launch {
-            val newBeverages = BeveragesEntity.create(id?:0, type, R.drawable.ic_cup, volume)
+            val newBeverages = BeveragesEntity.create(id?:0, type, R.drawable.ic_cup_water, volume)
             beveragesRepository.insertBeverage(newBeverages)
         }
     }

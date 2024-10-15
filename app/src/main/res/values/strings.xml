@@ -34,17 +34,18 @@
     <string name="home_today">Today</string>
     <string name="home_from_rate">From %1$d ml</string>
     <string name="home_current_rate">%1$d ml</string>
-    <string name="text_save">Save</string>
-    <string name="text_add">Add</string>
-    <string name="text_beverages">Beverages</string>
+    <string name="home_chooseDrink">Choose the drink:</string>
+    <string name="home_selectAmount">Select the amount in ml:</string>
+    <string name="home_other">Other</string>
+    <string name="home_enterAmount">Enter the amount of milliliters</string>
 
     <!--    Beverages text    -->
     <string name="beverages_water">Water</string>
     <string name="beverages_coffee">Coffee</string>
     <string name="beverages_tea">Tea</string>
     <string name="beverages_juice">Juice</string>
-    <string name="beverages_wine">Wine</string>
-    <string name="beverages_pepsi">Pepsi</string>
+    <string name="beverages_milk">Milk</string>
+    <string name="beverages_soda">Soda</string>
 
     <!--    Create cup screen    -->
     <string name="createCup_enterNameOfBeverages">Enter the name of the beverages</string>
@@ -73,5 +74,8 @@
     <string name="text_continue">Continue</string>
     <string name="text_delete">Delete</string>
     <string name="text_cancel">Cancel</string>
+    <string name="text_save">Save</string>
+    <string name="text_add">Add</string>
+    <string name="text_beverages">Beverages</string>
 
 </resources>

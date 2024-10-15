@@ -18,7 +18,7 @@ private const val DB_NAME = "app_database"
 
 @Database(
     entities = [UserEntity::class, BeveragesEntity::class, CupEntity::class, IntervalEntity::class],
-    version = 13,
+    version = 14,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

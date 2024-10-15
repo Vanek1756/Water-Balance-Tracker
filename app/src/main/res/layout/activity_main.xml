@@ -20,16 +20,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_poll" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.babiichuk.waterbalancetracker.app.ui.view.bottomnavview.CustomBottomNavigationView
         android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlueVariant1"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

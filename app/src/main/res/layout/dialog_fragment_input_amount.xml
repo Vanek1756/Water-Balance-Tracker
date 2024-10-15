@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/background_amount_dialog">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnCLose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_enterAmount"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:layout_marginHorizontal="24dp"
+        app:fontFamily="@font/koh_santepheap_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCLose" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="46dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textSize="32sp"
+        app:fontFamily="@font/jet_brains_mono_regular"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        tools:text="500" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/background_transparent_with_border"
+        android:paddingHorizontal="25dp"
+        android:text="@string/text_continue"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/jet_brains_mono_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputAmount"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

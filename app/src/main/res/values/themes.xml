@@ -4,7 +4,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.WaterBalanceTracker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-<!--         <item name="colorPrimary">@color/colorBlueVariant1</item>-->
+         <item name="colorPrimary">@color/colorBlueVariant4</item>
     </style>
 
     <style name="Theme.WaterBalanceTracker" parent="Base.Theme.WaterBalanceTracker">

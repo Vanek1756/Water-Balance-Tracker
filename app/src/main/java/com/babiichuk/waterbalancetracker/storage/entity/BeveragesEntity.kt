@@ -2,7 +2,6 @@ package com.babiichuk.waterbalancetracker.storage.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.babiichuk.waterbalancetracker.R
 
 @Entity(tableName = "beverages_table")
 data class BeveragesEntity(
@@ -33,13 +32,4 @@ data class BeveragesEntity(
             )
         }
     }
-}
-
-enum class DefaultBeveragesType(val nameResId: Int){
-    WATER(R.string.beverages_water),
-    COFFEE(R.string.beverages_coffee),
-    TEA(R.string.beverages_tea),
-    JUICE(R.string.beverages_juice),
-    WINE(R.string.beverages_wine),
-    PEPSI(R.string.beverages_pepsi)
 }

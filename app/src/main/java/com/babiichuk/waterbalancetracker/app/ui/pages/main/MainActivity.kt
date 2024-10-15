@@ -10,9 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUiSaveStateControl
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.extensions.show
 import com.babiichuk.waterbalancetracker.databinding.ActivityMainBinding
@@ -47,13 +46,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun startHomeFragments() {
         binding.bottomNavView.show()
-        navController.popBackStack(R.id.genderFragment, true)
-        navController.navigate(R.id.nav_main)
+        navController.navigate(
+            R.id.nav_main, null,
+            NavOptions
+                .Builder()
+                .setPopUpTo(R.id.nav_poll, false)
+                .build()
+        )
     }
 
-    @OptIn(NavigationUiSaveStateControl::class)
     private fun setupBottomNavMenu() {
-        NavigationUI.setupWithNavController(binding.bottomNavView, navController, false)
+        binding.bottomNavView.onItemClickListener = { menuId ->
+            navController.navigate(
+                menuId, null,
+                NavOptions
+                    .Builder()
+                    .setPopUpTo(R.id.nav_poll, false)
+                    .build()
+            )
+        }
     }
 
 

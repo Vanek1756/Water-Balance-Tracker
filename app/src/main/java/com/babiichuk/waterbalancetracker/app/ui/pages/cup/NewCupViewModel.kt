@@ -69,9 +69,9 @@ class NewCupViewModel @Inject constructor(
     }
 
     fun addCupsToInterval() {
-        val listOfCups = _beveragesMutableFLow.value
-            .filter { it.getStateOrFalse(State.SELECTED) }
-            .map { it.value }
-        intervalId?.let { cupsLoader.insertCups(listOfCups, it) }
+//        val listOfCups = _beveragesMutableFLow.value
+//            .filter { it.getStateOrFalse(State.SELECTED) }
+//            .map { it.value }
+//        intervalId?.let { cupsLoader.insertCup(listOfCups, it) }
     }
 }

@@ -40,7 +40,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private fun LoginViewModel.subscribe(){
         launchOnLifecycle(Lifecycle.State.STARTED) {
-            launch { mutableIsProgressVisible.collectLatest {  binding.loadingProgress.toggleVisibility(it) } }
             launch { mutableErrorMessage.collectLatest { showError(it) } }
             launch { userFlow.collectLatest { it?.let { signInSuccess(it) } } }
             launch { userEmail.bind(binding.inputEmail) }

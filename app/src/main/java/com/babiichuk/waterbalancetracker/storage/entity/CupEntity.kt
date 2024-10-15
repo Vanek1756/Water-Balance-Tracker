@@ -8,24 +8,16 @@ import org.joda.time.DateTime
 data class CupEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val beveragesId: Int,
-    val nameString: String,
-    val nameResId: Int,
-    val iconId: Int,
-    val volume: Int,
-    val intervalId: Int,
+    val cupId: String,
+    val amount: Int,
     val dateTime: String
 ){
     companion object Factory {
 
-        fun create(beverages: BeveragesEntity, intervalId: Int): CupEntity {
+        fun create(cupId: String, amount: Int): CupEntity {
             return CupEntity(
-                beveragesId = beverages.id,
-                nameString = beverages.nameString,
-                nameResId = beverages.nameResId,
-                iconId = beverages.iconId,
-                volume = beverages.volume,
-                intervalId = intervalId,
+                cupId = cupId,
+                amount = amount,
                 dateTime = DateTime.now().toString()
             )
         }
