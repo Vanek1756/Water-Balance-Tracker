@@ -1,5 +1,6 @@
 package com.babiichuk.waterbalancetracker.app.ui.view.progress
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.LinearGradient
@@ -21,7 +22,11 @@ class CircularProgressView @JvmOverloads constructor(
 
     private val typeface = ResourcesCompat.getFont(context, R.font.jet_brains_mono_regular)
 
-    private var progress = 50
+    private lateinit var topGradient: LinearGradient
+    private lateinit var bottomGradient: LinearGradient
+
+    private var progress = 0
+    private var targetProgress = 0
     private var maxProgress = 100
     private var waterRate = 2400
     private var currentRate = 0
@@ -60,13 +65,52 @@ class CircularProgressView @JvmOverloads constructor(
         typeface = this@CircularProgressView.typeface
     }
 
+    private val animator = ValueAnimator.ofInt(0, maxProgress).apply {
+        duration = 1000
+        addUpdateListener { animation ->
+            progress = animation.animatedValue as Int
+            invalidate()
+        }
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        val width = w.toFloat()
+        val height = h.toFloat()
+
+        val radius = width.coerceAtMost(height) / 2
+        val centerX = width / 2
+        val centerY = height / 2
+
+        val rect = RectF(
+            centerX - (radius - toPx(20)) + 10,
+            centerY - (radius - toPx(20)) + 10,
+            centerX + (radius - toPx(20)) - 10,
+            centerY + (radius - toPx(20)) - 10
+        )
+
+        bottomGradient = LinearGradient(
+            rect.left, rect.top, rect.right, rect.bottom,
+            arrayOfGradient,
+            null,
+            Shader.TileMode.CLAMP
+        )
+
+        topGradient = LinearGradient(
+            rect.left, rect.top, rect.right, rect.bottom,
+            arrayOfGradient,
+            null,
+            Shader.TileMode.CLAMP
+        )
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        // Окреслення кола
         val width = width.toFloat()
         val height = height.toFloat()
-        val radius = Math.min(width, height) / 2
+        val radius = width.coerceAtMost(height) / 2
         val centerX = width / 2
         val centerY = height / 2
         val startAngle = -90f
@@ -85,21 +129,11 @@ class CircularProgressView @JvmOverloads constructor(
             centerX + (radius - toPx(20)) - 10,
             centerY + (radius - toPx(20)) - 10
         )
-        bottomProgressPaint.shader = LinearGradient(
-            rect.left, rect.top, rect.right, rect.bottom,
-            arrayOfGradient,
-            null,
-            Shader.TileMode.CLAMP
-        )
+        bottomProgressPaint.shader = bottomGradient
         canvas.drawArc(rect, startAngle, 360f, false, bottomProgressPaint)
 
         val sweepAngle = 360f * progress / maxProgress
-        topProgressPaint.shader = LinearGradient(
-            rect.left, rect.top, rect.right, rect.bottom,
-            arrayOfGradient,
-            null,
-            Shader.TileMode.CLAMP
-        )
+        topProgressPaint.shader = topGradient
         canvas.drawArc(rect, startAngle, sweepAngle, false, topProgressPaint)
 
         canvas.drawText("$progress%", centerX, centerY, textPaint)
@@ -109,7 +143,12 @@ class CircularProgressView @JvmOverloads constructor(
     fun setCurrentRate(currentRate: Int) {
         this.currentRate = currentRate
         calculatePercentage()
-        invalidate()
+        startAnimation()
+    }
+
+    private fun startAnimation() {
+        animator.setIntValues(progress, targetProgress)
+        animator.start()
     }
 
     fun setWaterRate(waterRate: Int) {
@@ -120,6 +159,6 @@ class CircularProgressView @JvmOverloads constructor(
         if (waterRate == 0) {
             throw IllegalArgumentException("maxRate cannot be 0")
         }
-        this.progress = ((currentRate.toDouble() / waterRate.toDouble()) * 100).toInt()
+        targetProgress = ((currentRate.toDouble() / waterRate.toDouble()) * 100).toInt()
     }
 }
