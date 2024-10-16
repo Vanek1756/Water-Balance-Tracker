@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.babiichuk.waterbalancetracker"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -39,9 +39,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-//    buildFeatures {
-//        viewBinding = true
-//    }
     buildFeatures(
         Action<ApplicationBuildFeatures> {
             viewBinding = true
@@ -77,7 +74,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
 
     // Joda-time
-    implementation(libs.joda.time)
+//    implementation(libs.joda.time)
 
     // Adapter Delegates
     implementation(libs.adapterDelgates)
@@ -85,5 +82,7 @@ dependencies {
     // Kotpref
     implementation(libs.kotpref)
     implementation(libs.kotpref.initializer)
+
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 }

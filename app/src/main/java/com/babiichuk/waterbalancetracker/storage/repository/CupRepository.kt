@@ -15,6 +15,10 @@ class CupRepository @Inject constructor(private val beveragesDao: BeveragesDao) 
         return beveragesDao.getAllCupsForTodayFlow(today)
     }
 
+    fun getAllCupsByPeriod(startDate: String, endDate: String): List<CupEntity> {
+        return beveragesDao.getAllCupsByPeriod(startDate, endDate)
+    }
+
     suspend fun getCups(): List<CupEntity> {
         return beveragesDao.getAllCups()
     }

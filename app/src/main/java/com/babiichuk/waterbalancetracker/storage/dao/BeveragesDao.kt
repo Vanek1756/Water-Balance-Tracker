@@ -43,6 +43,9 @@ interface BeveragesDao {
     @Query("SELECT * FROM cup_table WHERE date(dateTime) = date(:today)")
     fun getAllCupsForTodayFlow(today: String): Flow<List<CupEntity>>
 
+    @Query("SELECT * FROM cup_table WHERE dateTime BETWEEN :startDate AND :endDate")
+    fun getAllCupsByPeriod(startDate: String, endDate: String): List<CupEntity>
+
     @Query("SELECT * FROM cup_table")
     suspend fun getAllCups(): List<CupEntity>
 

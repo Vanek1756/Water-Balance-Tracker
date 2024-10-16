@@ -1,9 +1,19 @@
 package com.babiichuk.waterbalancetracker.app.ui.utils
 
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
+import com.babiichuk.waterbalancetracker.storage.entity.CupEntity
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
+private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
 fun getTodayDate(): String {
-    val dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd")
-    return DateTime.now().toString(dateTimeFormatter)
+    return LocalDate.now().format(formatter)
+}
+
+fun parseToDate(cupEntity: CupEntity): LocalDate {
+    return LocalDate.parse(cupEntity.dateTime, formatter)
+}
+
+fun parseToString(localDate: LocalDate): String {
+    return localDate.format(formatter)
 }

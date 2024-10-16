@@ -2,7 +2,8 @@ package com.babiichuk.waterbalancetracker.storage.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.joda.time.DateTime
+import com.babiichuk.waterbalancetracker.app.ui.utils.parseToString
+import java.time.LocalDate
 
 @Entity(tableName = "cup_table")
 data class CupEntity(
@@ -18,7 +19,7 @@ data class CupEntity(
             return CupEntity(
                 cupId = cupId,
                 amount = amount,
-                dateTime = DateTime.now().toString()
+                dateTime = parseToString(LocalDate.now())
             )
         }
     }

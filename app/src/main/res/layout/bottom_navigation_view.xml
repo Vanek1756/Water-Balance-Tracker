@@ -9,10 +9,7 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:fabCradleMargin="8dp"
-        app:fabCradleRoundedCornerRadius="40dp"
-        app:fabCradleVerticalOffset="6dp">
+        android:layout_gravity="bottom">
 
         <LinearLayout
             android:layout_width="match_parent"

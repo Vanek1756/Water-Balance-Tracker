@@ -1,6 +1,7 @@
 package com.babiichuk.waterbalancetracker.app.ui.pages.stats
 
 import androidx.lifecycle.viewModelScope
+import com.babiichuk.waterbalancetracker.app.ui.loaders.CupLoader
 import com.babiichuk.waterbalancetracker.app.ui.loaders.StatisticLoader
 import com.babiichuk.waterbalancetracker.app.ui.pages.BaseViewModel
 import com.babiichuk.waterbalancetracker.core.entity.stats.StatsMonth
@@ -17,12 +18,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StatsViewModel @Inject constructor(
-    private val statisticLoader: StatisticLoader
+    private val statisticLoader: StatisticLoader,
+    private val cupLoader: CupLoader
 ) : BaseViewModel() {
 
     private val _statsMonthMutableFLow: MutableStateFlow<List<StateHolder<StatsMonth>>> =
         MutableStateFlow(emptyList())
     val statsMonthFLow = _statsMonthMutableFLow.asStateFlow()
+
+    val entryForChartStatsStateFlow = cupLoader.entryForChartStatsStateFlow
 
     init {
         viewModelScope.launch {
@@ -41,6 +45,10 @@ class StatsViewModel @Inject constructor(
 
     fun onMonthStateChanged(monthId: Int) {
         statisticLoader.onMonthStateChanged(monthId)
+    }
+
+    fun getSelectedMonth(): StatsMonth? {
+        return statsMonthFLow.value.find { it.getStateOrFalse(State.SELECTED) }?.value
     }
 
 }

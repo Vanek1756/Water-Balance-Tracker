@@ -8,10 +8,10 @@ import java.time.Month
 import java.time.temporal.TemporalAdjusters
 
 data class StatsMonth(
-    val id: Int,
-    val name: String,
-    val startDate: LocalDate,
-    val endDate: LocalDate
+    val id: Int = 0,
+    val name: String = "",
+    val startDate: LocalDate = LocalDate.now().with(TemporalAdjusters.firstDayOfMonth()),
+    val endDate: LocalDate = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth())
 ){
     object Factory{
 
