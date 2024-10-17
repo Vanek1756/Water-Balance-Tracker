@@ -1,59 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="@string/text_daily_dose_water_drunk"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent"
+    android:background="@color/colorBlueVariant4"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivDone"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        app:srcCompat="@drawable/ic_done_outline" />
+        android:id="@+id/ivTopWave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_home_top_wave" />
+
+    <com.babiichuk.waterbalancetracker.app.ui.view.progress.CircularProgressView
+        android:id="@+id/waterProgress"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="83dp"
+        android:layout_marginTop="20dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvWaterRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/rate_perfect"
         android:textColor="@color/colorWhite"
-        android:textSize="46sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDone"
-        tools:text="2 400 ml" />
+        android:textSize="36sp"
+        app:fontFamily="@font/ledger_regular" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnContinue"
-        android:layout_width="0dp"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginTop="14dp"
+        android:justificationMode="inter_word"
+        android:text="@string/rete_successMessage"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        app:fontFamily="@font/koh_santepheap_regular" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/background_button_blue_light"
+        android:paddingHorizontal="46dp"
         android:text="@string/text_continue"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWaterRate" />
+        android:textSize="20sp"
+        app:fontFamily="@font/jet_brains_mono_regular" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

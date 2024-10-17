@@ -14,6 +14,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.babiichuk.waterbalancetracker.R
 import com.babiichuk.waterbalancetracker.app.ui.extensions.show
+import com.babiichuk.waterbalancetracker.app.ui.extensions.showOrHideIf
 import com.babiichuk.waterbalancetracker.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -46,24 +47,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun startHomeFragments() {
         binding.bottomNavView.show()
-        navController.navigate(
-            R.id.nav_main, null,
-            NavOptions
-                .Builder()
-                .setPopUpTo(R.id.nav_poll, false)
-                .build()
-        )
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.nav_poll, false)
+            .build()
+        navController.navigate(R.id.nav_main, null, navOptions)
     }
 
     private fun setupBottomNavMenu() {
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.homeFragment, false)
+            .build()
         binding.bottomNavView.onItemClickListener = { menuId ->
-            navController.navigate(
-                menuId, null,
-                NavOptions
-                    .Builder()
-                    .setPopUpTo(R.id.nav_poll, false)
-                    .build()
-            )
+            navController.navigate(menuId, null, navOptions)
         }
     }
 
@@ -84,6 +79,10 @@ class MainActivity : AppCompatActivity() {
     private fun openRateDrunkFragment(value: Boolean) {
         if (!value) return
         navController.navigate(R.id.action_global_rateDrunk)
+    }
+
+    fun showOrHideBottomNavigationMenu(value: Boolean){
+        binding.bottomNavView.showOrHideIf { value }
     }
 
 }

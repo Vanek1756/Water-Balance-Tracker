@@ -22,7 +22,6 @@ fun Fragment.showToast(message: String, duration: Int) {
     Toast.makeText(requireContext(), message, duration).show()
 }
 
-
 fun Fragment.getColor(@ColorRes color: Int): Int {
     return ContextCompat.getColor(requireContext(), color)
 }
